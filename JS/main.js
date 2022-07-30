@@ -58,50 +58,47 @@ topLeftButton.addEventListener('click', function(){
         topRow[0] = 1;
         leftColumn[0]=1;
         diagonalTopToBottom[0]=1;
-        let numOfEmptySpaces = 0;
+        topLeftButton.textContent = 'X';
+
+        let numOfEmptySpaces = 0; 
         for (i = 0 ; i < boardArray.length; i++){
             for (x = 0; x < boardArray[i].length; x++){
-                if (boardArray[i][x] === 0){
+                if (boardArray[i][x] === 0){ //if the actual values in boardArray === 0 (aka no one has played there yet), increment the number of empty spaces
                     numOfEmptySpaces ++;
                 }
             }
         }
-        if (numOfEmptySpaces > 0){
-            let firstArrayNum = Math.floor(Math.random()*3);
-            let secondArrayNum = Math.floor(Math.random()*3);
-            let nextCompMove = boardArray[firstArrayNum][secondArrayNum];
+        if (numOfEmptySpaces > 0){   //use this number of empty spaces variable to make sure the computer is not trying to do this while loop forever with no empty spaces
+            //This is needed because the user could click the button and add a 1 to the board array for the 9th square and then the computer would be trying to fill the 10th forever 
+               let firstArrayNum = Math.floor(Math.random()*3); //This should give me a random integer of either 0,1,or 2
+               let secondArrayNum = Math.floor(Math.random()*3);
+               let nextCompMove = boardArray[firstArrayNum][secondArrayNum]; //so in our boardArray which is basically just an array of the three rows, 
+            //this is the value at the potential position of the computers move
     
-        while (nextCompMove !== 0){
-            firstArrayNum = Math.floor(Math.random()*3);
-            secondArrayNum = Math.floor(Math.random()*3);
-            nextCompMove = boardArray[firstArrayNum][secondArrayNum];
-         //eventually this should be 0 and we would have our position of where to put a 2 for the computer generated value
-        }
-       
-        }
-    }
+            while (nextCompMove !== 0){  //while the value at the potential position is NOT 0, the computer will keep generating random integers for the positions
+                //until it lands on a combo position where there would be a value of 0, meaning no one has played there yet
+                firstArrayNum = Math.floor(Math.random()*3);
+                secondArrayNum = Math.floor(Math.random()*3);
+                nextCompMove = boardArray[firstArrayNum][secondArrayNum]; //I believe that changing this variable is enough for the while loop to keep running untill that is not true (aka is equal to 0)
+            //eventually this should be 0 and we would have our position of where to put a 2 for the computer generated value and the while loop would end
+            }
 
-        //     }
-
-        //nested look to check each of the values, have to add a count if a value is 1 or 2, and then later outside say if the value is not 0, you can do the random thing 
-        }
-        do {
-        let firstArrayNum = Math.floor(Math.random()*3);
-        let secondArrayNum = Math.floor(Math.random()*3);
-        let nextCompMove = boardArray[firstArrayNum][secondArrayNum];
-        }
-        while (nextCompMove !== 0){
-            topLeftButton.textContent('O');
+            compAssignment(firstArrayNum, secondArrayNum); //Should still reconognize these input since they are initialized in the if statement and therefore those values are being updated from the while looop
+            //Now that we have our position for the computer, we can call the compAssignment function passing in these position values, which will update the arrays accordingly
+            //eventually call the render function now that the arrays are updated 
+        
         }
         else{
-
+            //change the win status to whoever won and render 
         }
-        }
-        console.log(topRow);
+        //Now that we have our position for the computer, we can call the compAssignment function passing in these position values, which will update the arrays accordingly
+        
+        //eventually call the render function now that the arrays are updated 
     }
     else{
         console.log("This space is already taken, please try again");
     }
+});
 
 
 const topCenterButton = document.getElementById('top-center');
@@ -109,7 +106,7 @@ topCenterButton.addEventListener('click', function(){
     if (topRow[1]===0){
         topRow[1] = 1;
         centerColumn[0]=1;
-        console.log(topRow);
+        //console.log(topRow);
     }
     else{
         console.log("This space is already taken, please try again");
@@ -123,7 +120,7 @@ topRightButton.addEventListener('click', function(){
             topRow[2] = 1;
             rightColumn[0] = 1;
             diagonalBottomToTop[2] = 1;
-            console.log(topRow);
+            //console.log(topRow);
         }
         else{
             console.log("This space is already taken, please try again");
@@ -136,7 +133,7 @@ middleLeftButton.addEventListener('click', function(){
     if (middleRow[0]===0){
         middleRow[0] = 1;
         leftColumn[1] = 1;
-        console.log(middleRow);
+        //console.log(middleRow);
         }
     else{
         console.log("This space is already taken, please try again");
@@ -151,7 +148,7 @@ middleCenterButton.addEventListener('click', function(){
         centerColumn[1] = 1;
         diagonalBottomToTop[1] = 1;
         diagonalTopToBottom[1] = 1;
-        console.log(middleRow);
+        //console.log(middleRow);
         }
     else{
         console.log("This space is already taken, please try again");
@@ -165,7 +162,7 @@ middleRightButton.addEventListener('click', function(){
     if (middleRow[2]===0){
         middleRow[2] = 1;
         rightColumn[1] = 1;
-        console.log(middleRow);
+        //console.log(middleRow);
         }
     else{
         console.log("This space is already taken, please try again");
@@ -178,7 +175,7 @@ bottomLeftButton.addEventListener('click', function(){
         bottomRow[0] = 1;
         leftColumn[2] = 1;
         diagonalBottomToTop[0] = 1;
-        console.log(bottomRow);
+        //console.log(bottomRow);
         }
     else{
         console.log("This space is already taken, please try again");
@@ -191,7 +188,7 @@ bottomCenterButton.addEventListener('click', function(){
     if (bottomRow[1]===0){
         bottomRow[1] = 1;
         middleColumn[2] = 1;
-        console.log(bottomRow);
+        //console.log(bottomRow);
         }
     else{
         console.log("This space is already taken, please try again");
@@ -205,7 +202,7 @@ bottomRightButton.addEventListener('click', function(){
         bottomRow[2] = 1;
         rightColumn[2] = 1;
         diagonalTopToBottom[2] = 1;
-        console.log(bottomRow);
+        //console.log(bottomRow);
         }
     else{
         console.log("This space is already taken, please try again");
@@ -213,9 +210,9 @@ bottomRightButton.addEventListener('click', function(){
 });
 
 
-function render(){
+//function render(){
     //if 
-}
+//}
                
 //do a function where like if a button is clicked, check the array? 
 
@@ -253,47 +250,56 @@ function render(){
 
 function compAssignment(rowPosition, columnPosition){
     //if winner is not null 
-        if (row === 0 && column === 0){//these represent the position aka the top left, not the actual value in the array
+        if (rowPosition === 0 && columnPosition === 0){//these represent the position aka the top left, not the actual value in the array
             topRow[0] = 2;
             leftColumn[0] = 2;
             diagonalTopToBottom[0] = 2;
+            topLeftButton.textContent = 'O';
         }
-        if (row === 0 && column === 1){
+        if (rowPosition === 0 && columnPosition === 1){
             topRow[1] = 2;
             centerColumn[0]=2;
+            topCenterButton.textContent = 'O';
         }
-        if (row === 0 && column === 2){
+        if (rowPosition === 0 && columnPosition === 2){
             topRow[2] = 2;
             rightColumn[0] = 2;
             diagonalBottomToTop[2] = 2;
+            topRightButton.textContent = 'O';
         }
-        if (row === 1 && column ===0){
+        if (rowPosition === 1 && columnPosition ===0){
             middleRow[0] = 2;
             leftColumn[1] = 2;
+            middleLeftButton.textContent = 'O';
         }
-        if (row === 1 && column ===1){
+        if (rowPosition === 1 && columnPosition ===1){
             middleRow[1] = 2;
             centerColumn[1] = 2;
             diagonalBottomToTop[1] = 2;
             diagonalTopToBottom[1] = 2;
+            middleCenterButton.textContent = 'O';
         }
-        if (row === 1 && column ===2){
+        if (rowPosition === 1 && columnPosition ===2){
             middleRow[2] = 2;
             rightColumn[1] = 2;
+            middleRightButton.textContent = 'O';
         }
-        if (row === 2 && column ===0){
+        if (rowPosition === 2 && columnPosition ===0){
             bottomRow[0] = 2;
             leftColumn[2] = 2;
             diagonalBottomToTop[0] = 2;
+            bottomLeftButton.textContent = 'O';
         }
-        if (row === 2 && column ===1){
+        if (rowPosition === 2 && columnPosition ===1){
             bottomRow[1] = 2;
-            middleColumn[2] = 2;
+            centerColumn[2] = 2;
+            bottomCenterButton.textContent = 'O';
         }
-        if (row === 2 && column ===2){
+        if (rowPosition === 2 && columnPosition ===2){
             bottomRow[2] = 2;
             rightColumn[2] = 2;
             diagonalTopToBottom[2] = 2;
+            bottomRightButton.textContent = 'O';
         }
     }
 
