@@ -49,9 +49,17 @@ topLeftButton.addEventListener('click', function(){
         leftColumn[0]=1;
         diagonalTopToBottom[0]=1;
         topLeftButton.textContent = 'X';
+        determineWinner();
+        if (winStatus === null){
+        
+            compPosition();
+            compAssignment(firstArrayNum, secondArrayNum);
+        }
 
-        compPosition(); //should update first and second arrayNum
-        compAssignment(firstArrayNum, secondArrayNum); //Should still reconognize these input since they are global variables and therefore those values are being updated from the while looop
+        //before this I need to call a function that would update a global variable win status 
+
+     //should update first and second arrayNum
+       //Should still reconognize these input since they are global variables and therefore those values are being updated from the while looop
             //Now that we have our position for the computer, we can call the compAssignment function passing in these position values, which will update the arrays accordingly
             //eventually call the render function now that the arrays are updated 
     }
@@ -71,10 +79,12 @@ topCenterButton.addEventListener('click', function(){
         topRow[1] = 1;
         centerColumn[0]=1;
         topCenterButton.textContent = 'X';
-
-        compPosition();
-        compAssignment(firstArrayNum, secondArrayNum); 
+        determineWinner();
+        if (winStatus === null){
         
+            compPosition();
+            compAssignment(firstArrayNum, secondArrayNum);
+        } 
     }
     else{
         console.log("This space is already taken, please try again");
@@ -89,9 +99,12 @@ topRightButton.addEventListener('click', function(){
         rightColumn[0] = 1;
         diagonalBottomToTop[2] = 1;
         topRightButton.textContent = 'X';
+        determineWinner();
+        if (winStatus === null){
         
-        compPosition();
-        compAssignment(firstArrayNum, secondArrayNum); 
+            compPosition();
+            compAssignment(firstArrayNum, secondArrayNum);
+        }
     }
     else{
         console.log("This space is already taken, please try again");
@@ -105,9 +118,12 @@ middleLeftButton.addEventListener('click', function(){
         middleRow[0] = 1;
         leftColumn[1] = 1;
         middleLeftButton.textContent = 'X';
-
-        compPosition();
-        compAssignment(firstArrayNum, secondArrayNum);
+        determineWinner();
+        if (winStatus === null){
+        
+            compPosition();
+            compAssignment(firstArrayNum, secondArrayNum);
+        }
     }
     else{
         console.log("This space is already taken, please try again");
@@ -123,9 +139,12 @@ middleCenterButton.addEventListener('click', function(){
         diagonalBottomToTop[1] = 1;
         diagonalTopToBottom[1] = 1;
         middleCenterButton.textContent = 'X';
-
-        compPosition();
-        compAssignment(firstArrayNum, secondArrayNum);
+        determineWinner();
+        if (winStatus === null){
+        
+            compPosition();
+            compAssignment(firstArrayNum, secondArrayNum);
+        }
     }
     else{
         console.log("This space is already taken, please try again");
@@ -140,9 +159,12 @@ middleRightButton.addEventListener('click', function(){
         middleRow[2] = 1;
         rightColumn[1] = 1;
         middleRightButton.textContent = 'X';
+        determineWinner();
+        if (winStatus === null){
         
-        compPosition();
-        compAssignment(firstArrayNum, secondArrayNum);
+            compPosition();
+            compAssignment(firstArrayNum, secondArrayNum);
+        }
     }
     else{
         console.log("This space is already taken, please try again");
@@ -156,9 +178,12 @@ bottomLeftButton.addEventListener('click', function(){
         leftColumn[2] = 1;
         diagonalBottomToTop[0] = 1;
         bottomLeftButton.textContent = 'X';
-       
-        compPosition();
-        compAssignment(firstArrayNum, secondArrayNum);
+        determineWinner();
+        if (winStatus === null){
+        
+            compPosition();
+            compAssignment(firstArrayNum, secondArrayNum);
+        }
     }
     else{
         console.log("This space is already taken, please try again");
@@ -172,9 +197,12 @@ bottomCenterButton.addEventListener('click', function(){
         bottomRow[1] = 1;
         centerColumn[2] = 1;
         bottomCenterButton.textContent = 'X';
-
-        compPosition();
-        compAssignment(firstArrayNum, secondArrayNum);
+        determineWinner();
+        if (winStatus === null){
+        
+            compPosition();
+            compAssignment(firstArrayNum, secondArrayNum);
+        }
     }
     else{
         console.log("This space is already taken, please try again");
@@ -189,9 +217,12 @@ bottomRightButton.addEventListener('click', function(){
         rightColumn[2] = 1;
         diagonalTopToBottom[2] = 1;
         bottomCenterButton.textContent = 'X';
-
-        compPosition();
-        compAssignment(firstArrayNum, secondArrayNum);
+        determineWinner();
+        if (winStatus === null){
+        
+            compPosition();
+            compAssignment(firstArrayNum, secondArrayNum);
+        }
     }
     else{
         console.log("This space is already taken, please try again");
@@ -320,6 +351,81 @@ function compAssignment(rowPosition, columnPosition){
         rightColumn[2] = 2;
         diagonalTopToBottom[2] = 2;
         bottomRightButton.textContent = 'O';
+    }
+}
+
+function determineWinner (){
+    if (!topRow.includes(0)){
+        if (!topRow.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!topRow.includes(1)){
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!middleRow.includes(0)){
+        if (!middleRow.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!middleRow.includes(1)){
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!bottomRow.includes(0)){
+        if (!bottomRow.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!bottomRow.includes(1)){
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!leftColumn.includes(0)){
+        if (!leftColumn.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!leftColumn.includes(1)){
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!centerColumn.includes(0)){
+        if (!centerColumn.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!centerColumn.includes(1)){
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!rightColumn.includes(0)){
+        if (!rightColumn.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!rightColumn.includes(1)){
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!diagonalTopToBottom.includes(0)){
+        if (!diagonalTopToBottom.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!diagonalTopToBottom.includes(1)){
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!diagonalBottomToTop.includes(0)){
+        if (!diagonalBottomToTop.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!diagonalBottomToTop.includes(1)){
+            console.log("Bummer...the computer won :(")
+        }
     }
 }
 
