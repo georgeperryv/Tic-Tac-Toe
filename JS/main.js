@@ -33,14 +33,16 @@ let winStatus = null;
 // }
 
 
-let topRow = [0,0,0];
+let topRow = [0,0,0]; //left to right
 let middleRow = [0,0,0];
-let bottomRow = [0,0,0];
-let leftColumn= [0,0,0];
+let bottomRow = [0,0,0]; 
+let leftColumn= [0,0,0]; //top to bottom
 let centerColumn = [0,0,0];
 let rightColumn = [0,0,0];
-let diagonalTopToBottom = [0,0,0];
+let diagonalTopToBottom = [0,0,0]; //left to right + description for north south direction
 let diagonalBottomToTop = [0,0,0];
+
+let boardArray = [topRow, middleRow, bottomRow];
 
 
 // const buttonList = document.querySelectorAll('.game-button')
@@ -51,10 +53,50 @@ let diagonalBottomToTop = [0,0,0];
 
 
 const topLeftButton = document.getElementById('top-left');
+topLeftButton.addEventListener('click', function(){
     if (topRow[0]===0){
         topRow[0] = 1;
         leftColumn[0]=1;
         diagonalTopToBottom[0]=1;
+        let numOfEmptySpaces = 0;
+        for (i = 0 ; i < boardArray.length; i++){
+            for (x = 0; x < boardArray[i].length; x++){
+                if (boardArray[i][x] === 0){
+                    numOfEmptySpaces ++;
+                }
+            }
+        }
+        if (numOfEmptySpaces > 0){
+            let firstArrayNum = Math.floor(Math.random()*3);
+            let secondArrayNum = Math.floor(Math.random()*3);
+            let nextCompMove = boardArray[firstArrayNum][secondArrayNum];
+    
+        while (nextCompMove !== 0){
+            firstArrayNum = Math.floor(Math.random()*3);
+            secondArrayNum = Math.floor(Math.random()*3);
+            nextCompMove = boardArray[firstArrayNum][secondArrayNum];
+         //eventually this should be 0 and we would have our position of where to put a 2 for the computer generated value
+        }
+       
+        }
+    }
+
+        //     }
+
+        //nested look to check each of the values, have to add a count if a value is 1 or 2, and then later outside say if the value is not 0, you can do the random thing 
+        }
+        do {
+        let firstArrayNum = Math.floor(Math.random()*3);
+        let secondArrayNum = Math.floor(Math.random()*3);
+        let nextCompMove = boardArray[firstArrayNum][secondArrayNum];
+        }
+        while (nextCompMove !== 0){
+            topLeftButton.textContent('O');
+        }
+        else{
+
+        }
+        }
         console.log(topRow);
     }
     else{
@@ -169,6 +211,11 @@ bottomRightButton.addEventListener('click', function(){
         console.log("This space is already taken, please try again");
     }
 });
+
+
+function render(){
+    //if 
+}
                
 //do a function where like if a button is clicked, check the array? 
 
@@ -202,3 +249,62 @@ bottomRightButton.addEventListener('click', function(){
 
 
 // eventListener();
+
+
+function compAssignment(rowPosition, columnPosition){
+    //if winner is not null 
+        if (row === 0 && column === 0){//these represent the position aka the top left, not the actual value in the array
+            topRow[0] = 2;
+            leftColumn[0] = 2;
+            diagonalTopToBottom[0] = 2;
+        }
+        if (row === 0 && column === 1){
+            topRow[1] = 2;
+            centerColumn[0]=2;
+        }
+        if (row === 0 && column === 2){
+            topRow[2] = 2;
+            rightColumn[0] = 2;
+            diagonalBottomToTop[2] = 2;
+        }
+        if (row === 1 && column ===0){
+            middleRow[0] = 2;
+            leftColumn[1] = 2;
+        }
+        if (row === 1 && column ===1){
+            middleRow[1] = 2;
+            centerColumn[1] = 2;
+            diagonalBottomToTop[1] = 2;
+            diagonalTopToBottom[1] = 2;
+        }
+        if (row === 1 && column ===2){
+            middleRow[2] = 2;
+            rightColumn[1] = 2;
+        }
+        if (row === 2 && column ===0){
+            bottomRow[0] = 2;
+            leftColumn[2] = 2;
+            diagonalBottomToTop[0] = 2;
+        }
+        if (row === 2 && column ===1){
+            bottomRow[1] = 2;
+            middleColumn[2] = 2;
+        }
+        if (row === 2 && column ===2){
+            bottomRow[2] = 2;
+            rightColumn[2] = 2;
+            diagonalTopToBottom[2] = 2;
+        }
+    }
+
+// let topRow = [0,0,0];
+// let middleRow = [0,0,0];
+// let bottomRow = [0,0,0];
+// let leftColumn= [0,0,0];
+// let centerColumn = [0,0,0];
+// let rightColumn = [0,0,0];
+// let diagonalTopToBottom = [0,0,0];
+// let diagonalBottomToTop = [0,0,0];
+
+
+//all of these functions should call render at the end so that last thing to happen is it does something to the screen? 
