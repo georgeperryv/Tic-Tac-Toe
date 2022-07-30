@@ -49,6 +49,7 @@ topLeftButton.addEventListener('click', function(){
         leftColumn[0]=1;
         diagonalTopToBottom[0]=1;
         topLeftButton.textContent = 'X';
+        topLeftButton.setAttribute('style', "font-size: 80px");
         determineWinner();
         if (winStatus === null){
         
@@ -79,11 +80,13 @@ topCenterButton.addEventListener('click', function(){
         topRow[1] = 1;
         centerColumn[0]=1;
         topCenterButton.textContent = 'X';
+        topCenterButton.setAttribute('style', "font-size: 80px");
         determineWinner();
         if (winStatus === null){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
+            determineWinner();
         } 
     }
     else{
@@ -99,11 +102,13 @@ topRightButton.addEventListener('click', function(){
         rightColumn[0] = 1;
         diagonalBottomToTop[2] = 1;
         topRightButton.textContent = 'X';
+        topRightButton.setAttribute('style', "font-size: 80px");
         determineWinner();
         if (winStatus === null){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
+            determineWinner();
         }
     }
     else{
@@ -118,11 +123,13 @@ middleLeftButton.addEventListener('click', function(){
         middleRow[0] = 1;
         leftColumn[1] = 1;
         middleLeftButton.textContent = 'X';
+        middleLeftButton.setAttribute('style', "font-size: 80px");
         determineWinner();
         if (winStatus === null){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
+            determineWinner();
         }
     }
     else{
@@ -139,11 +146,13 @@ middleCenterButton.addEventListener('click', function(){
         diagonalBottomToTop[1] = 1;
         diagonalTopToBottom[1] = 1;
         middleCenterButton.textContent = 'X';
+        middleCenterButton.setAttribute('style', "font-size: 80px");
         determineWinner();
         if (winStatus === null){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
+            determineWinner();
         }
     }
     else{
@@ -159,11 +168,13 @@ middleRightButton.addEventListener('click', function(){
         middleRow[2] = 1;
         rightColumn[1] = 1;
         middleRightButton.textContent = 'X';
+        middleRightButton.setAttribute('style', "font-size: 80px");
         determineWinner();
         if (winStatus === null){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
+            determineWinner();
         }
     }
     else{
@@ -178,11 +189,13 @@ bottomLeftButton.addEventListener('click', function(){
         leftColumn[2] = 1;
         diagonalBottomToTop[0] = 1;
         bottomLeftButton.textContent = 'X';
+        bottomLeftButton.setAttribute('style', "font-size: 80px");
         determineWinner();
         if (winStatus === null){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
+            determineWinner();
         }
     }
     else{
@@ -197,11 +210,13 @@ bottomCenterButton.addEventListener('click', function(){
         bottomRow[1] = 1;
         centerColumn[2] = 1;
         bottomCenterButton.textContent = 'X';
+        bottomCenterButton.setAttribute('style', "font-size: 80px");
         determineWinner();
         if (winStatus === null){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
+            determineWinner();
         }
     }
     else{
@@ -216,12 +231,14 @@ bottomRightButton.addEventListener('click', function(){
         bottomRow[2] = 1;
         rightColumn[2] = 1;
         diagonalTopToBottom[2] = 1;
-        bottomCenterButton.textContent = 'X';
+        bottomRightButton.textContent = 'X';
+        bottomRightButton.setAttribute('style', "font-size: 80px");
         determineWinner();
         if (winStatus === null){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
+            determineWinner();
         }
     }
     else{
@@ -306,22 +323,26 @@ function compAssignment(rowPosition, columnPosition){
         leftColumn[0] = 2;
         diagonalTopToBottom[0] = 2;
         topLeftButton.textContent = 'O';
+        topLeftButton.setAttribute('style', "font-size: 80px");
     }
     if (rowPosition === 0 && columnPosition === 1){
         topRow[1] = 2;
         centerColumn[0]=2;
         topCenterButton.textContent = 'O';
+        topCenterButton.setAttribute('style', "font-size: 80px");
     }
     if (rowPosition === 0 && columnPosition === 2){
         topRow[2] = 2;
         rightColumn[0] = 2;
         diagonalBottomToTop[2] = 2;
         topRightButton.textContent = 'O';
+        topRightButton.setAttribute('style', "font-size: 80px");
     }
     if (rowPosition === 1 && columnPosition ===0){
         middleRow[0] = 2;
         leftColumn[1] = 2;
         middleLeftButton.textContent = 'O';
+        middleLeftButton.setAttribute('style', "font-size: 80px");
     }
     if (rowPosition === 1 && columnPosition ===1){
         middleRow[1] = 2;
@@ -329,28 +350,33 @@ function compAssignment(rowPosition, columnPosition){
         diagonalBottomToTop[1] = 2;
         diagonalTopToBottom[1] = 2;
         middleCenterButton.textContent = 'O';
+        middleCenterButton.setAttribute('style', "font-size: 80px");
     }
     if (rowPosition === 1 && columnPosition ===2){
         middleRow[2] = 2;
         rightColumn[1] = 2;
         middleRightButton.textContent = 'O';
+        middleRightButton.setAttribute('style', "font-size: 80px");
     }
     if (rowPosition === 2 && columnPosition ===0){
         bottomRow[0] = 2;
         leftColumn[2] = 2;
         diagonalBottomToTop[0] = 2;
         bottomLeftButton.textContent = 'O';
+        bottomLeftButton.setAttribute('style', "font-size: 80px");
     }
     if (rowPosition === 2 && columnPosition ===1){
         bottomRow[1] = 2;
         centerColumn[2] = 2;
         bottomCenterButton.textContent = 'O';
+        bottomCenterButton.setAttribute('style', "font-size: 80px");
     }
     if (rowPosition === 2 && columnPosition ===2){
         bottomRow[2] = 2;
         rightColumn[2] = 2;
         diagonalTopToBottom[2] = 2;
         bottomRightButton.textContent = 'O';
+        bottomRightButton.setAttribute('style', "font-size: 80px");
     }
 }
 
@@ -412,9 +438,11 @@ function determineWinner (){
     if (!diagonalTopToBottom.includes(0)){
         if (!diagonalTopToBottom.includes(2)){
             winStatus = 1;
+            console.log(diagonalTopToBottom);
             console.log("Contracts! You win!")
         }
         else if (!diagonalTopToBottom.includes(1)){
+            console.log(diagonalTopToBottom);
             console.log("Bummer...the computer won :(")
         }
     }

@@ -1,0 +1,42 @@
+/*  body{
+    min-width: 300px; 
+    /* has to be the body that has the min width pixels for it not to wrap around for some reason - not sure why exactly 
+}
+
+
+.buttons{
+    width:400px;
+    height: 200px;
+    border: 1px solid black;
+    display: grid;
+    /* each direct child of the div with the class buttons will be a grid element 
+    justify-content: center;
+    align-content: center;
+
+    /* gap: 4px;
+    grid-auto-flow: column; 
+
+
+
+    /* display: grid;
+    width: 300px;
+    justify-content: center;
+    gap: 100px;
+    min-width: 100px;
+    position: relative;  
+} */
+
+
+.buttons {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 160px 160px 160px;
+    grid-template-rows: 160px 160px 160px;
+    
+    background-color: aquamarine;
+}
+
+/* .game-button {
+  
+   
+} */
