@@ -26,14 +26,71 @@
     position: relative;  
 } */
 
+body{
+   text-align: center;
+   min-width: 300px;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+
+    font-size: 18px;
+}
+
+h3{
+    font-size: 16px;
+    font-style: italic;
+    font-weight: lighter;
+}
+
+.game-button {
+background-size: 50%;
+background-color: rgb(47, 196, 220);
+}
+
+
+.other-buttons {
+    display: inline;
+    /* color: white; */
+    margin: 30px 30px 30px 30px;
+    min-width: 300px;
+}
+
+.reset-button{
+    background-color: red;
+    margin: 30px 30px 30px 30px;
+    color: white;
+    font-size: 16px;
+}
+
+.next-game{
+    background-color: rgb(37, 160, 37);
+    margin: 30px 30px 30px 30px;
+    color: white;
+    font-size: 16px;
+}
+
+div.list {
+    text-align: center;
+}
+
+ul.directions{
+    display: inline-block;
+    text-align: left;
+}
+
+
 
 .buttons {
     display: grid;
+    justify-content: center;
     grid-gap: 10px;
     grid-template-columns: 160px 160px 160px;
     grid-template-rows: 160px 160px 160px;
-    
-    background-color: aquamarine;
+ 
 }
 
 /* .game-button {

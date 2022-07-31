@@ -43,6 +43,8 @@ let firstArrayNum = 0;
 let secondArrayNum = 0;
 let nextCompMove = 0;
 
+let messageEl = document.querySelector('h3');
+
 
 
 
@@ -73,6 +75,8 @@ resetButton.addEventListener('click', function(){
     secondArrayNum = 0;
     nextCompMove = 0;
 
+    messageEl.innerText = "Let the games begin!";
+
 
     topLeftButton.textContent = '';
     // topLeftButton.setAttribute('style', "font-size: 80px");
@@ -99,53 +103,55 @@ resetButton.addEventListener('click', function(){
 
 const nextGameButton = document.querySelector('.next-game');
 nextGameButton.addEventListener('click', function(){
-    
-    console.clear();
-    
-    winStatus = null;
-    plays = 0;
-    console.log(gamesWonPlayer);
-    console.log(gamesWonComputer)
-    console.log(tieGames);
-    
-    topRow = [0,0,0]; 
-    middleRow = [0,0,0];
-    bottomRow = [0,0,0]; 
-    leftColumn= [0,0,0]; 
-    centerColumn = [0,0,0];
-    rightColumn = [0,0,0];
-    diagonalTopToBottom = [0,0,0]; 
-    diagonalBottomToTop = [0,0,0];
+   if (winStatus !== null){
+        console.clear();
+        
+        winStatus = null;
+        plays = 0;
+        console.log(gamesWonPlayer);
+        console.log(gamesWonComputer)
+        console.log(tieGames);
+        
+        topRow = [0,0,0]; 
+        middleRow = [0,0,0];
+        bottomRow = [0,0,0]; 
+        leftColumn= [0,0,0]; 
+        centerColumn = [0,0,0];
+        rightColumn = [0,0,0];
+        diagonalTopToBottom = [0,0,0]; 
+        diagonalBottomToTop = [0,0,0];
 
-    boardArray = [topRow, middleRow, bottomRow];
-    totalWinningCombos = [topRow, middleRow, bottomRow, leftColumn, centerColumn, rightColumn, diagonalTopToBottom, diagonalBottomToTop];
+        boardArray = [topRow, middleRow, bottomRow];
+        totalWinningCombos = [topRow, middleRow, bottomRow, leftColumn, centerColumn, rightColumn, diagonalTopToBottom, diagonalBottomToTop];
 
-    firstArrayNum = 0;
-    secondArrayNum = 0;
-    nextCompMove = 0;
+        firstArrayNum = 0;
+        secondArrayNum = 0;
+        nextCompMove = 0;
+
+        messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
 
 
 
-    topLeftButton.textContent = '';
-    // topLeftButton.setAttribute('style', "font-size: 80px");
-    topCenterButton.textContent = '';
-    // topCenterButton.setAttribute('style', "font-size: 80px");
-    topRightButton.textContent = '';
-    // topRightButton.setAttribute('style', "font-size: 80px");
-    middleLeftButton.textContent = '';
-    // middleLeftButton.setAttribute('style', "font-size: 80px");
-    middleCenterButton.textContent = '';
-    // middleCenterButton.setAttribute('style', "font-size: 80px");
-    middleRightButton.textContent = '';
-    // middleRightButton.setAttribute('style', "font-size: 80px");
-    bottomLeftButton.textContent = '';
-    // bottomLeftButton.setAttribute('style', "font-size: 80px");
-    bottomCenterButton.textContent = '';
-    // bottomCenterButton.setAttribute('style', "font-size: 80px");
-    bottomRightButton.textContent = '';
-    // bottomRightButton.setAttribute('style', "font-size: 80px");
+        topLeftButton.textContent = '';
+        // topLeftButton.setAttribute('style', "font-size: 80px");
+        topCenterButton.textContent = '';
+        // topCenterButton.setAttribute('style', "font-size: 80px");
+        topRightButton.textContent = '';
+        // topRightButton.setAttribute('style', "font-size: 80px");
+        middleLeftButton.textContent = '';
+        // middleLeftButton.setAttribute('style', "font-size: 80px");
+        middleCenterButton.textContent = '';
+        // middleCenterButton.setAttribute('style', "font-size: 80px");
+        middleRightButton.textContent = '';
+        // middleRightButton.setAttribute('style', "font-size: 80px");
+        bottomLeftButton.textContent = '';
+        // bottomLeftButton.setAttribute('style', "font-size: 80px");
+        bottomCenterButton.textContent = '';
+        // bottomCenterButton.setAttribute('style', "font-size: 80px");
+        bottomRightButton.textContent = '';
+        // bottomRightButton.setAttribute('style', "font-size: 80px");
 
-});
+}});
 
 
 const topLeftButton = document.getElementById('top-left');
@@ -180,6 +186,8 @@ topLeftButton.addEventListener('click', function(){
         //eventually call the render function now that the arrays are updated 
     else{
         console.log("This space is already taken, please try again");
+
+        h3.innerText = "This space is already taken, please try again";
     }
 });
 
