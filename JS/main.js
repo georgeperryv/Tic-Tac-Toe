@@ -23,6 +23,9 @@
 
 let winStatus = null;
 let plays = 0;
+let gamesWonPlayer = 0;
+let gamesWonComputer = 0;
+let tieGames = 0;
 
 let topRow = [0,0,0]; //left to right
 let middleRow = [0,0,0];
@@ -50,6 +53,9 @@ const resetButton = document.querySelector('.reset-button');
 resetButton.addEventListener('click', function(){
     winStatus = null;
     plays = 0;
+    gamesWonPlayer = 0;
+    gamesWonComputer = 0;
+    tieGames = 0;
     
     topRow = [0,0,0]; 
     middleRow = [0,0,0];
@@ -88,6 +94,57 @@ resetButton.addEventListener('click', function(){
     // bottomRightButton.setAttribute('style', "font-size: 80px");
 
     console.clear();
+});
+
+
+const nextGameButton = document.querySelector('.next-game');
+nextGameButton.addEventListener('click', function(){
+    
+    console.clear();
+    
+    winStatus = null;
+    plays = 0;
+    console.log(gamesWonPlayer);
+    console.log(gamesWonComputer)
+    console.log(tieGames);
+    
+    topRow = [0,0,0]; 
+    middleRow = [0,0,0];
+    bottomRow = [0,0,0]; 
+    leftColumn= [0,0,0]; 
+    centerColumn = [0,0,0];
+    rightColumn = [0,0,0];
+    diagonalTopToBottom = [0,0,0]; 
+    diagonalBottomToTop = [0,0,0];
+
+    boardArray = [topRow, middleRow, bottomRow];
+    totalWinningCombos = [topRow, middleRow, bottomRow, leftColumn, centerColumn, rightColumn, diagonalTopToBottom, diagonalBottomToTop];
+
+    firstArrayNum = 0;
+    secondArrayNum = 0;
+    nextCompMove = 0;
+
+
+
+    topLeftButton.textContent = '';
+    // topLeftButton.setAttribute('style', "font-size: 80px");
+    topCenterButton.textContent = '';
+    // topCenterButton.setAttribute('style', "font-size: 80px");
+    topRightButton.textContent = '';
+    // topRightButton.setAttribute('style', "font-size: 80px");
+    middleLeftButton.textContent = '';
+    // middleLeftButton.setAttribute('style', "font-size: 80px");
+    middleCenterButton.textContent = '';
+    // middleCenterButton.setAttribute('style', "font-size: 80px");
+    middleRightButton.textContent = '';
+    // middleRightButton.setAttribute('style', "font-size: 80px");
+    bottomLeftButton.textContent = '';
+    // bottomLeftButton.setAttribute('style', "font-size: 80px");
+    bottomCenterButton.textContent = '';
+    // bottomCenterButton.setAttribute('style', "font-size: 80px");
+    bottomRightButton.textContent = '';
+    // bottomRightButton.setAttribute('style', "font-size: 80px");
+
 });
 
 
@@ -488,80 +545,96 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
             if (!topRow.includes(2)){
                 winStatus = 1;
                 console.log("Contracts! You win!")
+                gamesWonPlayer++;
             }
             else if (!topRow.includes(1)){
                 winStatus = 2;
                 console.log("Bummer...the computer won :(")
+                gamesWonComputer++;
             }
         }
         if (!middleRow.includes(0)){
             if (!middleRow.includes(2)){
                 winStatus = 1;
                 console.log("Contracts! You win!")
+                gamesWonPlayer++;
             }
             else if (!middleRow.includes(1)){
                 winStatus = 2;
                 console.log("Bummer...the computer won :(")
+                gamesWonComputer++;
             }
         }
         if (!bottomRow.includes(0)){
             if (!bottomRow.includes(2)){
                 winStatus = 1;
                 console.log("Contracts! You win!")
+                gamesWonPlayer++;
             }
             else if (!bottomRow.includes(1)){
                 winStatus = 2;
                 console.log("Bummer...the computer won :(")
+                gamesWonComputer++;
             }
         }
         if (!leftColumn.includes(0)){
             if (!leftColumn.includes(2)){
                 winStatus = 1;
                 console.log("Contracts! You win!")
+                gamesWonPlayer++;
             }
             else if (!leftColumn.includes(1)){
                 winStatus = 2;
                 console.log("Bummer...the computer won :(")
+                gamesWonComputer++;
             }
         }
         if (!centerColumn.includes(0)){
             if (!centerColumn.includes(2)){
                 winStatus = 1;
                 console.log("Contracts! You win!")
+                gamesWonPlayer++;
             }
             else if (!centerColumn.includes(1)){
                 winStatus = 2;
                 console.log("Bummer...the computer won :(")
+                gamesWonComputer++;
             }
         }
         if (!rightColumn.includes(0)){
             if (!rightColumn.includes(2)){
                 winStatus = 1;
                 console.log("Contracts! You win!")
+                gamesWonPlayer++;
             }
             else if (!rightColumn.includes(1)){
                 winStatus = 2;
                 console.log("Bummer...the computer won :(")
+                gamesWonComputer++;
             }
         }
         if (!diagonalTopToBottom.includes(0)){
             if (!diagonalTopToBottom.includes(2)){
                 winStatus = 1;
                 console.log("Contracts! You win!")
+                gamesWonPlayer++;
             }
             else if (!diagonalTopToBottom.includes(1)){
                 winStatus = 2;
                 console.log("Bummer...the computer won :(")
+                gamesWonComputer++;
             }
         }
         if (!diagonalBottomToTop.includes(0)){
             if (!diagonalBottomToTop.includes(2)){
                 winStatus = 1;
                 console.log("Contracts! You win!")
+                gamesWonPlayer++;
             }
             else if (!diagonalBottomToTop.includes(1)){
                 winStatus = 2;
                 console.log("Bummer...the computer won :(")
+                gamesWonComputer++;
             }
         }
         if (winStatus === null){
@@ -578,6 +651,7 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                                                                                 // console.log(diagonalTopToBottom);
                                                                                 // console.log(diagonalBottomToTop);
                                                                                 console.log("It's a tie1! Try again!");
+                                                                                tieGames++;
             }
         
         } 
@@ -637,6 +711,7 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                         //console.log(possib)
                         winStatus = 3;
                         console.log("GOING TO BE A TIE!!");
+                        tieGames++;
                         // console.log(possibleWinsForPlayer);
                         // console.log(possibleWinsForComputer);
                         // console.log(plays);
@@ -674,7 +749,8 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                 if (possibleWinsForPlayerV2 === 0){
                     // console.log(totalWinningCombos);
                     winStatus = 3;
-                    console.log("GOING TO BE A TIE! 8Plays!")
+                    console.log("GOING TO BE A TIE! 8Plays!");
+                    tieGames++;
                 }  
                 }
             }
