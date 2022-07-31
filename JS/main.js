@@ -16,16 +16,13 @@
 //Below will turn to either tie, win, or lose from the player perspective but will remain null until then
 //Will return tie if all of the arrays are full, and win if any of the arrays have all 1s and lose if any
 //of the arrays have all 2s
-let winStatus = null;
-let plays = 0;
 
-//Not sure what to do with this player object yet
-// let player {
-
-// }
 
 
 //Global variables below
+
+let winStatus = null;
+let plays = 0;
 
 let topRow = [0,0,0]; //left to right
 let middleRow = [0,0,0];
@@ -43,6 +40,52 @@ let secondArrayNum = 0;
 let nextCompMove = 0;
 
 
+
+
+
+const resetButton = document.querySelector('.reset-button');
+resetButton.addEventListener('click', function(){
+    winStatus = null;
+    plays = 0;
+    
+    topRow = [0,0,0]; 
+    middleRow = [0,0,0];
+    bottomRow = [0,0,0]; 
+    leftColumn= [0,0,0]; 
+    centerColumn = [0,0,0];
+    rightColumn = [0,0,0];
+    diagonalTopToBottom = [0,0,0]; 
+    diagonalBottomToTop = [0,0,0];
+
+    boardArray = [topRow, middleRow, bottomRow];
+
+    firstArrayNum = 0;
+    secondArrayNum = 0;
+    nextCompMove = 0;
+
+    topLeftButton.textContent = '';
+    // topLeftButton.setAttribute('style', "font-size: 80px");
+    topCenterButton.textContent = '';
+    // topCenterButton.setAttribute('style', "font-size: 80px");
+    topRightButton.textContent = '';
+    // topRightButton.setAttribute('style', "font-size: 80px");
+    middleLeftButton.textContent = '';
+    // middleLeftButton.setAttribute('style', "font-size: 80px");
+    middleCenterButton.textContent = '';
+    // middleCenterButton.setAttribute('style', "font-size: 80px");
+    middleRightButton.textContent = '';
+    // middleRightButton.setAttribute('style', "font-size: 80px");
+    bottomLeftButton.textContent = '';
+    // bottomLeftButton.setAttribute('style', "font-size: 80px");
+    bottomCenterButton.textContent = '';
+    // bottomCenterButton.setAttribute('style', "font-size: 80px");
+    bottomRightButton.textContent = '';
+    // bottomRightButton.setAttribute('style', "font-size: 80px");
+
+    console.clear();
+});
+
+
 const topLeftButton = document.getElementById('top-left');
 topLeftButton.addEventListener('click', function(){
     if (topRow[0]===0){
@@ -57,8 +100,9 @@ topLeftButton.addEventListener('click', function(){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
-            determineWinner();
             plays++
+            determineWinner();
+            
         }
 
         //before this I need to call a function that would update a global variable win status 
@@ -78,6 +122,7 @@ topLeftButton.addEventListener('click', function(){
 });
 
 
+
 const topCenterButton = document.getElementById('top-center');
 topCenterButton.addEventListener('click', function(){
     if (topRow[1]===0){
@@ -91,8 +136,9 @@ topCenterButton.addEventListener('click', function(){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
-            determineWinner();
             plays++
+            determineWinner();
+            
         } 
     }
     else{
@@ -115,8 +161,9 @@ topRightButton.addEventListener('click', function(){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
-            determineWinner();
             plays++
+            determineWinner();
+            
         }
     }
     else{
@@ -138,8 +185,9 @@ middleLeftButton.addEventListener('click', function(){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
-            determineWinner();
             plays++
+            determineWinner();
+            
         }
     }
     else{
@@ -163,8 +211,9 @@ middleCenterButton.addEventListener('click', function(){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
-            determineWinner();
             plays++
+            determineWinner();
+            
         }
     }
     else{
@@ -187,8 +236,9 @@ middleRightButton.addEventListener('click', function(){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
-            determineWinner();
             plays++
+            determineWinner();
+           
         }
     }
     else{
@@ -210,8 +260,9 @@ bottomLeftButton.addEventListener('click', function(){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
-            determineWinner();
             plays++
+            determineWinner();
+            
         }
     }
     else{
@@ -233,8 +284,9 @@ bottomCenterButton.addEventListener('click', function(){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
-            determineWinner();
             plays++
+            determineWinner();
+            
         }
     }
     else{
@@ -257,8 +309,9 @@ bottomRightButton.addEventListener('click', function(){
         
             compPosition();
             compAssignment(firstArrayNum, secondArrayNum);
-            determineWinner();
             plays++
+            determineWinner();
+            
         }
     }
     else{
@@ -400,94 +453,199 @@ function compAssignment(rowPosition, columnPosition){
     }
 }
 
+// (plays === 8) && 
+
 function determineWinner (){  //This first if is predicting a tie ahead of time so the player doesn't have to finish - if each of the 8 winning arrays has both a 1 and a 2 in it
     //or it is the 8th turn and there is a 2 in each of the 8 winning arrays but the computer hasn't won yet (meaning the player can't win with the last move), the it will predict 
     // and call a tie before making the player play the last move
-    if (((topRow.includes(1) && topRow.includes(2)) && (middleRow.includes(1) && middleRow.includes(2)) && (bottomRow.includes(1) && bottomRow.includes(2)) //in the future could i put all of these arrays into an array and do .contains of the whole thing?
-    && (leftColumn.includes(1) && leftColumn.includes(2)) && (centerColumn.includes(1) && centerColumn.includes(2)) && (rightColumn.includes(1) && rightColumn.includes(2))
-    && (diagonalTopToBottom.includes(1) && diagonalTopToBottom.includes(2)) && (diagonalBottomToTop.includes(1) && diagonalBottomToTop.includes(2))) || 
-    ((plays === 8) && (topRow.includes(2) && middleRow.includes(2) && bottomRow.includes(2) && leftColumn.includes(2) && centerColumn.includes(2) && rightColumn.includes(2)
-    && diagonalTopToBottom.includes(2) && diagonalBottomToTop.includes(2)))){
-        winStatus = 0;
-        console.log("It's a tie! Try again!")
-    }
-    else{
-        if (!topRow.includes(0)){
-            if (!topRow.includes(2)){
-                winStatus = 1;
-                console.log("Contracts! You win!")
-            }
-            else if (!topRow.includes(1)){
-                console.log("Bummer...the computer won :(")
-            }
+   
+        
+    //     topRow.includes(1) &&
+    // middleRow.includes(1) && bottomRow.includes(1) && leftColumn.includes(1) && centerColumn.includes(1) && rightColumn.includes(1) && diagonalTopToBottom.includes(1) && diagonalBottomToTop.includes(1))))){
+
+
+
+    // ((topRow.includes(2) && middleRow.includes(2) && bottomRow.includes(2) && leftColumn.includes(2) && centerColumn.includes(2) && rightColumn.includes(2)
+    // && diagonalTopToBottom.includes(2) && diagonalBottomToTop.includes(2)))  
+    
+    // ((plays === 7 && (!(topRow.includes(1) && middleRow.includes(1) && bottomRow.includes(1) && leftColumn.includes(1) && centerColumn.includes(1) && rightColumn.includes(1) && diagonalTopToBottom.includes(1) && diagonalBottomToTop.includes(1)))) && (((topRow[0] === 0 && topRow[1] === 0 && topRow[2] === 1) || (topRow[0] === 0 &&
+    //     topRow[1] ===1 && topRow[2] ===0) || (topRow[0]===1 && topRow[1] === 0 && topRow[2] === 0)) || ((middleRow[0] === 0 && middleRow[1] === 0 && middleRow[2] === 1) || (middleRow[0] === 0 &&
+    //         middleRow[1] ===1 && middleRow[2] ===0) || (middleRow[0]===1 && middleRow[1] === 0 && middleRow[2] === 0)) || ((bottomRow[0] === 0 && bottomRow[1] === 0 && bottomRow[2] === 1) || (bottomRow[0] === 0 &&
+    //             bottomRow[1] ===1 && bottomRow[2] ===0) || (bottomRow[0]===1 && bottomRow[1] === 0 && bottomRow[2] === 0)) || ((leftColumn[0] === 0 && leftColumn[1] === 0 && leftColumn[2] === 1) || (leftColumn[0] === 0 &&
+    //                 leftColumn[1] ===1 && leftColumn[2] ===0) || (leftColumn[0]===1 && leftColumn[1] === 0 && leftColumn[2] === 0)) || ((centerColumn[0] === 0 && centerColumn[1] === 0 && centerColumn[2] === 1) || (centerColumn[0] === 0 &&
+    //                     centerColumn[1] ===1 && centerColumn[2] ===0) || (centerColumn[0]===1 && centerColumn[1] === 0 && centerColumn[2] === 0)) || ((rightColumn[0] === 0 && rightColumn[1] === 0 && rightColumn[2] === 1) || (rightColumn[0] === 0 &&
+    //                         rightColumn[1] ===1 && rightColumn[2] ===0) || (rightColumn[0]===1 && rightColumn[1] === 0 && rightColumn[2] === 0)) || ((diagonalTopToBottom[0] === 0 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 1) || (diagonalTopToBottom[0] === 0 &&
+    //                             diagonalTopToBottom[1] ===1 && diagonalTopToBottom[2] ===0) || (diagonalTopToBottom[0]===1 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 0)) || ((diagonalBottomToTop[0] === 0 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 1) || (diagonalBottomToTop[0] === 0 &&
+    //                                 diagonalBottomToTop[1] ===1 && diagonalBottomToTop[2] ===0) || (diagonalBottomToTop[0]===1 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 0))))){
+    
+    if (!topRow.includes(0)){
+        if (!topRow.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
         }
-        if (!middleRow.includes(0)){
-            if (!middleRow.includes(2)){
-                winStatus = 1;
-                console.log("Contracts! You win!")
-            }
-            else if (!middleRow.includes(1)){
-                console.log("Bummer...the computer won :(")
-            }
-        }
-        if (!bottomRow.includes(0)){
-            if (!bottomRow.includes(2)){
-                winStatus = 1;
-                console.log("Contracts! You win!")
-            }
-            else if (!bottomRow.includes(1)){
-                console.log("Bummer...the computer won :(")
-            }
-        }
-        if (!leftColumn.includes(0)){
-            if (!leftColumn.includes(2)){
-                winStatus = 1;
-                console.log("Contracts! You win!")
-            }
-            else if (!leftColumn.includes(1)){
-                console.log("Bummer...the computer won :(")
-            }
-        }
-        if (!centerColumn.includes(0)){
-            if (!centerColumn.includes(2)){
-                winStatus = 1;
-                console.log("Contracts! You win!")
-            }
-            else if (!centerColumn.includes(1)){
-                console.log("Bummer...the computer won :(")
-            }
-        }
-        if (!rightColumn.includes(0)){
-            if (!rightColumn.includes(2)){
-                winStatus = 1;
-                console.log("Contracts! You win!")
-            }
-            else if (!rightColumn.includes(1)){
-                console.log("Bummer...the computer won :(")
-            }
-        }
-        if (!diagonalTopToBottom.includes(0)){
-            if (!diagonalTopToBottom.includes(2)){
-                winStatus = 1;
-                console.log(diagonalTopToBottom);
-                console.log("Contracts! You win!")
-            }
-            else if (!diagonalTopToBottom.includes(1)){
-                console.log(diagonalTopToBottom);
-                console.log("Bummer...the computer won :(")
-            }
-        }
-        if (!diagonalBottomToTop.includes(0)){
-            if (!diagonalBottomToTop.includes(2)){
-                winStatus = 1;
-                console.log("Contracts! You win!")
-            }
-            else if (!diagonalBottomToTop.includes(1)){
-                console.log("Bummer...the computer won :(")
-            }
+        else if (!topRow.includes(1)){
+            winStatus = 2;
+            console.log("Bummer...the computer won :(")
         }
     }
-}
+    if (!middleRow.includes(0)){
+        if (!middleRow.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!middleRow.includes(1)){
+            winStatus = 2;
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!bottomRow.includes(0)){
+        if (!bottomRow.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!bottomRow.includes(1)){
+            winStatus = 2;
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!leftColumn.includes(0)){
+        if (!leftColumn.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!leftColumn.includes(1)){
+            winStatus = 2;
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!centerColumn.includes(0)){
+        if (!centerColumn.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!centerColumn.includes(1)){
+            winStatus = 2;
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!rightColumn.includes(0)){
+        if (!rightColumn.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!rightColumn.includes(1)){
+            winStatus = 2;
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!diagonalTopToBottom.includes(0)){
+        if (!diagonalTopToBottom.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!diagonalTopToBottom.includes(1)){
+            winStatus = 2;
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (!diagonalBottomToTop.includes(0)){
+        if (!diagonalBottomToTop.includes(2)){
+            winStatus = 1;
+            console.log("Contracts! You win!")
+        }
+        else if (!diagonalBottomToTop.includes(1)){
+            winStatus = 2;
+            console.log("Bummer...the computer won :(")
+        }
+    }
+    if (winStatus === null){
+        if (((topRow.includes(1) && topRow.includes(2)) && (middleRow.includes(1) && middleRow.includes(2)) && (bottomRow.includes(1) && bottomRow.includes(2)) //in the future could i put all of these arrays into an array and do .contains of the whole thing?
+        && (leftColumn.includes(1) && leftColumn.includes(2)) && (centerColumn.includes(1) && centerColumn.includes(2)) && (rightColumn.includes(1) && rightColumn.includes(2)) //if there is a 1 and 2 in every winning array
+        && (diagonalTopToBottom.includes(1) && diagonalTopToBottom.includes(2)) && (diagonalBottomToTop.includes(1) && diagonalBottomToTop.includes(2)))){
+                                                                            winStatus = 3;
+                                                                            console.log(topRow);
+                                                                            console.log(middleRow);
+                                                                            console.log(bottomRow);
+                                                                            console.log(leftColumn);
+                                                                            console.log(centerColumn);
+                                                                            console.log(rightColumn);
+                                                                            console.log(diagonalTopToBottom);
+                                                                            console.log(diagonalBottomToTop);
+                                                                            console.log(plays);
+                                                                            console.log("It's a tie1! Try again!");
+        }
+    } 
+    if (winStatus === null){
+        if (((plays === 7) && (!(topRow[0] === 0 && topRow[1] === 1 && topRow[2] === 1) && !(topRow[0] === 1 &&  // If it has been 7 turns and there is NO array with two 1s (aka player 1 cannot win)
+        topRow[1] ===1 && topRow[2] ===0) && !(topRow[0]===1 && topRow[1] === 0 && topRow[2] === 1) && !(middleRow[0] === 0 && middleRow[1] === 1 && middleRow[2] === 1) && !(middleRow[0] === 1 &&
+            middleRow[1] ===1 && middleRow[2] ===0) && !(middleRow[0]===1 && middleRow[1] === 0 && middleRow[2] === 1) && !(bottomRow[0] === 0 && bottomRow[1] === 1 && bottomRow[2] === 1) && !(bottomRow[0] === 1 &&
+                bottomRow[1] ===1 && bottomRow[2] ===0) && !(bottomRow[0]===1 && bottomRow[1] === 0 && bottomRow[2] === 1) && !(leftColumn[0] === 0 && leftColumn[1] === 1 && leftColumn[2] === 1) && !(leftColumn[0] === 1 &&
+                    leftColumn[1] ===1 && leftColumn[2] ===0) && !(leftColumn[0]===1 && leftColumn[1] === 0 && leftColumn[2] === 1) && !(centerColumn[0] === 0 && centerColumn[1] === 1 && centerColumn[2] === 1) && !(centerColumn[0] === 1 &&
+                        centerColumn[1] ===1 && centerColumn[2] ===0) && !(centerColumn[0]===1 && centerColumn[1] === 0 && centerColumn[2] === 1) && !(rightColumn[0] === 0 && rightColumn[1] === 1 && rightColumn[2] === 1) && !(rightColumn[0] === 1 &&
+                            rightColumn[1] ===1 && rightColumn[2] ===0) && !(rightColumn[0]===1 && rightColumn[1] === 0 && rightColumn[2] === 1) && !(diagonalTopToBottom[0] === 0 && diagonalTopToBottom[1] === 1 && diagonalTopToBottom[2] === 1) && !(diagonalTopToBottom[0] === 1 &&
+                                diagonalTopToBottom[1] ===1 && diagonalTopToBottom[2] ===0) && !(diagonalTopToBottom[0]===1 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 1) && !(diagonalBottomToTop[0] === 0 && diagonalBottomToTop[1] === 1 && diagonalBottomToTop[2] === 1) && !(diagonalBottomToTop[0] === 1 &&
+                                    diagonalBottomToTop[1] ===1 && diagonalBottomToTop[2] ===0) && !(diagonalBottomToTop[0]===1 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 1))) || ((plays === 8) && ((!(topRow[0] === 0 && topRow[1] === 2 && topRow[2] === 2) && !(topRow[0] === 2 &&  // If it has been 7 turns and there is NO array with two 1s (aka player 1 cannot win)
+                                    topRow[1] ===2 && topRow[2] ===0) && !(topRow[0]===2 && topRow[1] === 0 && topRow[2] === 2) && !(middleRow[0] === 0 && middleRow[1] === 2 && middleRow[2] === 2) && !(middleRow[0] === 2 &&
+                                        middleRow[1] ===2 && middleRow[2] ===0) && !(middleRow[0]===2 && middleRow[1] === 0 && middleRow[2] === 2) && !(bottomRow[0] === 0 && bottomRow[1] === 2 && bottomRow[2] === 2) && !(bottomRow[0] === 2 &&
+                                            bottomRow[1] ===2 && bottomRow[2] ===0) && !(bottomRow[0]===2 && bottomRow[1] === 0 && bottomRow[2] === 2) && !(leftColumn[0] === 0 && leftColumn[1] === 2 && leftColumn[2] === 2) && !(leftColumn[0] === 2 &&
+                                                leftColumn[1] ===2 && leftColumn[2] ===0) && !(leftColumn[0]===2 && leftColumn[1] === 0 && leftColumn[2] === 2) && !(centerColumn[0] === 0 && centerColumn[1] === 2 && centerColumn[2] === 2) && !(centerColumn[0] === 2 &&
+                                                    centerColumn[1] ===2 && centerColumn[2] ===0) && !(centerColumn[0]===2 && centerColumn[1] === 0 && centerColumn[2] === 2) && !(rightColumn[0] === 0 && rightColumn[1] === 2 && rightColumn[2] === 2) && !(rightColumn[0] === 2 &&
+                                                        rightColumn[1] ===2 && rightColumn[2] ===0) && !(rightColumn[0]===2 && rightColumn[1] === 0 && rightColumn[2] === 2) && !(diagonalTopToBottom[0] === 0 && diagonalTopToBottom[1] === 2 && diagonalTopToBottom[2] === 2) && !(diagonalTopToBottom[0] === 2 &&
+                                                            diagonalTopToBottom[1] ===2 && diagonalTopToBottom[2] ===0) && !(diagonalTopToBottom[0]===2 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 2) && !(diagonalBottomToTop[0] === 0 && diagonalBottomToTop[1] === 2 && diagonalBottomToTop[2] === 2) && !(diagonalBottomToTop[0] === 2 &&
+                                                                diagonalBottomToTop[1] ===2 && diagonalBottomToTop[2] ===0) && !(diagonalBottomToTop[0]===2 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 2)) && (!(topRow[0] === 0 && topRow[1] === 1 && topRow[2] === 1) && !(topRow[0] === 1 &&  // If it has been 7 turns and there is NO array with two 1s (aka player 1 cannot win)
+                                                                topRow[1] ===1 && topRow[2] ===0) && !(topRow[0]===1 && topRow[1] === 0 && topRow[2] === 1) && !(middleRow[0] === 0 && middleRow[1] === 1 && middleRow[2] === 1) && !(middleRow[0] === 1 &&
+                                                                    middleRow[1] ===1 && middleRow[2] ===0) && !(middleRow[0]===1 && middleRow[1] === 0 && middleRow[2] === 1) && !(bottomRow[0] === 0 && bottomRow[1] === 1 && bottomRow[2] === 1) && !(bottomRow[0] === 1 &&
+                                                                        bottomRow[1] ===1 && bottomRow[2] ===0) && !(bottomRow[0]===1 && bottomRow[1] === 0 && bottomRow[2] === 1) && !(leftColumn[0] === 0 && leftColumn[1] === 1 && leftColumn[2] === 1) && !(leftColumn[0] === 1 &&
+                                                                            leftColumn[1] ===1 && leftColumn[2] ===0) && !(leftColumn[0]===1 && leftColumn[1] === 0 && leftColumn[2] === 1) && !(centerColumn[0] === 0 && centerColumn[1] === 1 && centerColumn[2] === 1) && !(centerColumn[0] === 1 &&
+                                                                                centerColumn[1] ===1 && centerColumn[2] ===0) && !(centerColumn[0]===1 && centerColumn[1] === 0 && centerColumn[2] === 1) && !(rightColumn[0] === 0 && rightColumn[1] === 1 && rightColumn[2] === 1) && !(rightColumn[0] === 1 &&
+                                                                                    rightColumn[1] ===1 && rightColumn[2] ===0) && !(rightColumn[0]===1 && rightColumn[1] === 0 && rightColumn[2] === 1) && !(diagonalTopToBottom[0] === 0 && diagonalTopToBottom[1] === 1 && diagonalTopToBottom[2] === 1) && !(diagonalTopToBottom[0] === 1 &&
+                                                                                        diagonalTopToBottom[1] ===1 && diagonalTopToBottom[2] ===0) && !(diagonalTopToBottom[0]===1 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 1) && !(diagonalBottomToTop[0] === 0 && diagonalBottomToTop[1] === 1 && diagonalBottomToTop[2] === 1) && !(diagonalBottomToTop[0] === 1 &&
+                                                                                            diagonalBottomToTop[1] ===1 && diagonalBottomToTop[2] ===0) && !(diagonalBottomToTop[0]===1 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 1))))){
+
+
+                                                                            winStatus = 3;
+                                                                            console.log(topRow);
+                                                                            console.log(middleRow);
+                                                                            console.log(bottomRow);
+                                                                            console.log(leftColumn);
+                                                                            console.log(centerColumn);
+                                                                            console.log(rightColumn);
+                                                                            console.log(diagonalTopToBottom);
+                                                                            console.log(diagonalBottomToTop);
+                                                                            console.log(plays);
+                                                                            console.log("TIE TWO");}
+                                                                
+    }
+    
+    
+    
+    // else if (((plays === 7) && (!(topRow[0] === 0 && topRow[1] === 2 && topRow[2] === 2) && !(topRow[0] === 2 &&  // If it has been 7 turns and there is NO array with two 1s (aka player 1 cannot win)
+    // topRow[1] ===2 && topRow[2] ===0) && !(topRow[0]===2 && topRow[1] === 0 && topRow[2] === 2) && !(middleRow[0] === 0 && middleRow[1] === 2 && middleRow[2] === 2) && !(middleRow[0] === 2 &&
+    //     middleRow[1] ===2 && middleRow[2] ===0) && !(middleRow[0]===2 && middleRow[1] === 0 && middleRow[2] === 2) && !(bottomRow[0] === 0 && bottomRow[1] === 2 && bottomRow[2] === 2) && !(bottomRow[0] === 2 &&
+    //         bottomRow[1] ===2 && bottomRow[2] ===0) && !(bottomRow[0]===2 && bottomRow[1] === 0 && bottomRow[2] === 2) && !(leftColumn[0] === 0 && leftColumn[1] === 2 && leftColumn[2] === 2) && !(leftColumn[0] === 2 &&
+    //             leftColumn[1] ===2 && leftColumn[2] ===0) && !(leftColumn[0]===2 && leftColumn[1] === 0 && leftColumn[2] === 2) && !(centerColumn[0] === 0 && centerColumn[1] === 2 && centerColumn[2] === 2) && !(centerColumn[0] === 2 &&
+    //                 centerColumn[1] ===2 && centerColumn[2] ===0) && !(centerColumn[0]===2 && centerColumn[1] === 0 && centerColumn[2] === 2) && !(rightColumn[0] === 0 && rightColumn[1] === 2 && rightColumn[2] === 2) && !(rightColumn[0] === 2 &&
+    //                     rightColumn[1] ===2 && rightColumn[2] ===0) && !(rightColumn[0]===2 && rightColumn[1] === 0 && rightColumn[2] === 2) && !(diagonalTopToBottom[0] === 0 && diagonalTopToBottom[1] === 2 && diagonalTopToBottom[2] === 2) && !(diagonalTopToBottom[0] === 2 &&
+    //                         diagonalTopToBottom[1] ===2 && diagonalTopToBottom[2] ===0) && !(diagonalTopToBottom[0]===2 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 2) && !(diagonalBottomToTop[0] === 0 && diagonalBottomToTop[1] === 2 && diagonalBottomToTop[2] === 2) && !(diagonalBottomToTop[0] === 2 &&
+    //                             diagonalBottomToTop[1] ===2 && diagonalBottomToTop[2] ===0) && !(diagonalBottomToTop[0]===2 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 2)))){
+        
+    //                                                                     winStatus = 3;
+    //                                                                     console.log(topRow);
+    //                                                                     console.log(middleRow);
+    //                                                                     console.log(bottomRow);
+    //                                                                     console.log(leftColumn);
+    //                                                                     console.log(centerColumn);
+    //                                                                     console.log(rightColumn);
+    //                                                                     console.log(diagonalTopToBottom);
+    //                                                                     console.log(diagonalBottomToTop);
+    //                                                                     console.log(plays);
+    //                                                                     console.log("It's a tie3! Try again!")
+
+
+    //                                                                 }
+ }
+
+
 
 // let topRow = [0,0,0];
 // let middleRow = [0,0,0];
