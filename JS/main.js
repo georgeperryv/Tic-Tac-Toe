@@ -395,66 +395,67 @@ function compPosition (){ //find the position we should add a 2 at by using rand
 
 
 function compAssignment(rowPosition, columnPosition){
-    //if winner is not null 
-    if (rowPosition === 0 && columnPosition === 0){//these represent the position aka the top left, not the actual value in the array
-        topRow[0] = 2;
-        leftColumn[0] = 2;
-        diagonalTopToBottom[0] = 2;
-        topLeftButton.textContent = 'O';
-        topLeftButton.setAttribute('style', "font-size: 80px");
-    }
-    if (rowPosition === 0 && columnPosition === 1){
-        topRow[1] = 2;
-        centerColumn[0]=2;
-        topCenterButton.textContent = 'O';
-        topCenterButton.setAttribute('style', "font-size: 80px");
-    }
-    if (rowPosition === 0 && columnPosition === 2){
-        topRow[2] = 2;
-        rightColumn[0] = 2;
-        diagonalBottomToTop[2] = 2;
-        topRightButton.textContent = 'O';
-        topRightButton.setAttribute('style', "font-size: 80px");
-    }
-    if (rowPosition === 1 && columnPosition ===0){
-        middleRow[0] = 2;
-        leftColumn[1] = 2;
-        middleLeftButton.textContent = 'O';
-        middleLeftButton.setAttribute('style', "font-size: 80px");
-    }
-    if (rowPosition === 1 && columnPosition ===1){
-        middleRow[1] = 2;
-        centerColumn[1] = 2;
-        diagonalBottomToTop[1] = 2;
-        diagonalTopToBottom[1] = 2;
-        middleCenterButton.textContent = 'O';
-        middleCenterButton.setAttribute('style', "font-size: 80px");
-    }
-    if (rowPosition === 1 && columnPosition ===2){
-        middleRow[2] = 2;
-        rightColumn[1] = 2;
-        middleRightButton.textContent = 'O';
-        middleRightButton.setAttribute('style', "font-size: 80px");
-    }
-    if (rowPosition === 2 && columnPosition ===0){
-        bottomRow[0] = 2;
-        leftColumn[2] = 2;
-        diagonalBottomToTop[0] = 2;
-        bottomLeftButton.textContent = 'O';
-        bottomLeftButton.setAttribute('style', "font-size: 80px");
-    }
-    if (rowPosition === 2 && columnPosition ===1){
-        bottomRow[1] = 2;
-        centerColumn[2] = 2;
-        bottomCenterButton.textContent = 'O';
-        bottomCenterButton.setAttribute('style', "font-size: 80px");
-    }
-    if (rowPosition === 2 && columnPosition ===2){
-        bottomRow[2] = 2;
-        rightColumn[2] = 2;
-        diagonalTopToBottom[2] = 2;
-        bottomRightButton.textContent = 'O';
-        bottomRightButton.setAttribute('style', "font-size: 80px");
+    if (winStatus === null){
+        if (rowPosition === 0 && columnPosition === 0){//these represent the position aka the top left, not the actual value in the array
+            topRow[0] = 2;
+            leftColumn[0] = 2;
+            diagonalTopToBottom[0] = 2;
+            topLeftButton.textContent = 'O';
+            topLeftButton.setAttribute('style', "font-size: 80px");
+        }
+        if (rowPosition === 0 && columnPosition === 1){
+            topRow[1] = 2;
+            centerColumn[0]=2;
+            topCenterButton.textContent = 'O';
+            topCenterButton.setAttribute('style', "font-size: 80px");
+        }
+        if (rowPosition === 0 && columnPosition === 2){
+            topRow[2] = 2;
+            rightColumn[0] = 2;
+            diagonalBottomToTop[2] = 2;
+            topRightButton.textContent = 'O';
+            topRightButton.setAttribute('style', "font-size: 80px");
+        }
+        if (rowPosition === 1 && columnPosition ===0){
+            middleRow[0] = 2;
+            leftColumn[1] = 2;
+            middleLeftButton.textContent = 'O';
+            middleLeftButton.setAttribute('style', "font-size: 80px");
+        }
+        if (rowPosition === 1 && columnPosition ===1){
+            middleRow[1] = 2;
+            centerColumn[1] = 2;
+            diagonalBottomToTop[1] = 2;
+            diagonalTopToBottom[1] = 2;
+            middleCenterButton.textContent = 'O';
+            middleCenterButton.setAttribute('style', "font-size: 80px");
+        }
+        if (rowPosition === 1 && columnPosition ===2){
+            middleRow[2] = 2;
+            rightColumn[1] = 2;
+            middleRightButton.textContent = 'O';
+            middleRightButton.setAttribute('style', "font-size: 80px");
+        }
+        if (rowPosition === 2 && columnPosition ===0){
+            bottomRow[0] = 2;
+            leftColumn[2] = 2;
+            diagonalBottomToTop[0] = 2;
+            bottomLeftButton.textContent = 'O';
+            bottomLeftButton.setAttribute('style', "font-size: 80px");
+        }
+        if (rowPosition === 2 && columnPosition ===1){
+            bottomRow[1] = 2;
+            centerColumn[2] = 2;
+            bottomCenterButton.textContent = 'O';
+            bottomCenterButton.setAttribute('style', "font-size: 80px");
+        }
+        if (rowPosition === 2 && columnPosition ===2){
+            bottomRow[2] = 2;
+            rightColumn[2] = 2;
+            diagonalTopToBottom[2] = 2;
+            bottomRightButton.textContent = 'O';
+            bottomRightButton.setAttribute('style', "font-size: 80px");
+        }
     }
 }
 
@@ -568,15 +569,14 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
             && (leftColumn.includes(1) && leftColumn.includes(2)) && (centerColumn.includes(1) && centerColumn.includes(2)) && (rightColumn.includes(1) && rightColumn.includes(2)) //if there is a 1 and 2 in every winning array
             && (diagonalTopToBottom.includes(1) && diagonalTopToBottom.includes(2)) && (diagonalBottomToTop.includes(1) && diagonalBottomToTop.includes(2)))){
                                                                                 winStatus = 3;
-                                                                                console.log(topRow);
-                                                                                console.log(middleRow);
-                                                                                console.log(bottomRow);
-                                                                                console.log(leftColumn);
-                                                                                console.log(centerColumn);
-                                                                                console.log(rightColumn);
-                                                                                console.log(diagonalTopToBottom);
-                                                                                console.log(diagonalBottomToTop);
-                                                                                console.log(plays);
+                                                                                // console.log(topRow);
+                                                                                // console.log(middleRow);
+                                                                                // console.log(bottomRow);
+                                                                                // console.log(leftColumn);
+                                                                                // console.log(centerColumn);
+                                                                                // console.log(rightColumn);
+                                                                                // console.log(diagonalTopToBottom);
+                                                                                // console.log(diagonalBottomToTop);
                                                                                 console.log("It's a tie1! Try again!");
             }
         
@@ -635,7 +635,7 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                     if (possibleWinsForComputer === 0){
                         //console.log(totalWinningCombos);
                         //console.log(possib)
-                        winStatus === 3;
+                        winStatus = 3;
                         console.log("GOING TO BE A TIE!!");
                         // console.log(possibleWinsForPlayer);
                         // console.log(possibleWinsForComputer);
@@ -673,7 +673,7 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                 }
                 if (possibleWinsForPlayerV2 === 0){
                     // console.log(totalWinningCombos);
-                    winStatus === 3;
+                    winStatus = 3;
                     console.log("GOING TO BE A TIE! 8Plays!")
                 }  
                 }
