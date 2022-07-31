@@ -585,11 +585,11 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
         if(winStatus === null){
             if (plays === 7 || plays === 8){
                 let possibleWinsForPlayer = 0;
+                let numZeros = 0;
+                let numOnes = 0;
+
                 for(let i = 0; i < totalWinningCombos.length; i++){
                     for(let x = 0; x < totalWinningCombos[i].length; x++){  //This should reset numZeros and numOnes to 0 every time the inner for loop interates, so then possible Wins is updated if the condition is met and that would be a running tally 
-                        
-                        let numZeros = 0;
-                        let numOnes = 0;
                         if (totalWinningCombos[i][x] === 0){
                             numZeros++;
                         }
@@ -600,16 +600,23 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                             possibleWinsForPlayer++;
                             //console.log(possibleWinsForPlayer + "First 1" + plays);
                         }
+                        
+                        
                     }
+                console.log("numZeros" + numZeros);
+                console.log("numOnes" + numOnes);
+                console.log("possible Wins" + possibleWinsForPlayer);
+                numZeros = 0;
+                numOnes = 0;
                 }
                 if (possibleWinsForPlayer === 0){
                     //console.log(possibleWinsForPlayer + "Second 2" + plays);
                     let possibleWinsForComputer = 0;
+                    let numZerosComp = 0;
+                    let numTwosComp = 0;
                     for(let a = 0; a < totalWinningCombos.length; a++){               
                         for(let b = 0; b < totalWinningCombos[a].length; b++){  //This should reset numZeros and numOnes to 0 every time the inner for loop interates, so then possible Wins is updated if the condition is met and that would be a running tally 
                            
-                            let numZerosComp = 0;
-                            let numTwosComp = 0;
                             if (totalWinningCombos[a][b] === 0){
                                 numZerosComp++;
                             }
@@ -621,6 +628,8 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                             }
                             
                         }
+                        numZerosComp = 0;
+                        numTwosComp = 0; 
                        
                     }
                     if (possibleWinsForComputer === 0){
@@ -628,9 +637,9 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                         //console.log(possib)
                         winStatus === 3;
                         console.log("GOING TO BE A TIE!!");
-                        console.log(possibleWinsForPlayer);
-                        console.log(possibleWinsForComputer);
-                        console.log(plays);
+                        // console.log(possibleWinsForPlayer);
+                        // console.log(possibleWinsForComputer);
+                        // console.log(plays);
                         
                     }
                 }
@@ -642,22 +651,25 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
         if(winStatus === null){
             if (plays === 8){
                 let possibleWinsForPlayerV2 = 0;
+                let numZerosV2 = 0;
+                let numOnesV2 = 0;
                 for(let c = 0; c < totalWinningCombos.length; c++){
                     
                     for(let d = 0; d < totalWinningCombos[c].length; d++){  //This should reset numZeros and numOnes to 0 every time the inner for loop interates, so then possible Wins is updated if the condition is met and that would be a running tally 
                       
-                        let numZerosV2 = 0;
-                        let numOnesV2 = 0;
-                        if (totalWinningCombos[i][x] === 0){
+                        
+                        if (totalWinningCombos[c][d] === 0){
                             numZerosV2++;
                         }
-                        if (totalWinningCombos[i][x] === 1){
+                        if (totalWinningCombos[c][d] === 1){
                             numOnesV2++;
                         }
                         if (numOnesV2 === 2 && numZerosV2 === 1){
                             possibleWinsForPlayerV2++;
                         }
-                    }    
+                    } 
+                    numZerosV2 = 0;
+                    numOnesV2 = 0;   
                 }
                 if (possibleWinsForPlayerV2 === 0){
                     // console.log(totalWinningCombos);
