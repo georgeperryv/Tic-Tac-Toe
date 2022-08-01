@@ -1,33 +1,16 @@
 
 
 
-/*----- constants -----*/
-/*----- app's state (variables) -----*/
-/*----- cached element references -----*/
-/*----- event listeners -----*/
-/*----- functions -----*/
-
-
-
-// function render(){
-
-// }
-
-//Below will turn to either tie, win, or lose from the player perspective but will remain null until then
-//Will return tie if all of the arrays are full, and win if any of the arrays have all 1s and lose if any
-//of the arrays have all 2s
-
-
 
 //Global variables below
 
 let winStatus = null;
-let plays = 0;
-let gamesWonPlayer = 0;
+let plays = 0; //number of plays that have occured in a game
+let gamesWonPlayer = 0; 
 let gamesWonComputer = 0;
 let tieGames = 0;
 
-let topRow = [0,0,0]; //left to right
+let topRow = [0,0,0]; //left to right   - These are arrays of all of the possible ways to win Tic Tac Toe
 let middleRow = [0,0,0];
 let bottomRow = [0,0,0]; 
 let leftColumn= [0,0,0]; //top to bottom
@@ -36,24 +19,24 @@ let rightColumn = [0,0,0];
 let diagonalTopToBottom = [0,0,0]; //left to right + description for north south direction
 let diagonalBottomToTop = [0,0,0];
 
-let boardArray = [topRow, middleRow, bottomRow];
-let totalWinningCombos = [topRow, middleRow, bottomRow, leftColumn, centerColumn, rightColumn, diagonalTopToBottom, diagonalBottomToTop];
+let boardArray = [topRow, middleRow, bottomRow]; //9 spots, one for each button
+let totalWinningCombos = [topRow, middleRow, bottomRow, leftColumn, centerColumn, rightColumn, diagonalTopToBottom, diagonalBottomToTop]; // all possible combos in one array
 
-let firstArrayNum = 0;
-let secondArrayNum = 0;
-let nextCompMove = 0;
+let firstArrayNum = 0; //used for position for the computer random assignment
+let secondArrayNum = 0; //used for position for the computer random assignment
+let nextCompMove = 0; //value at the position the computer has randomly chosen (this should be 0 (aka no one has gone there yet) before an "O" is assigned as the computer's turn)
 
-let messageEl = document.querySelector('h3');
+let messageEl = document.querySelector('h3'); //message on screen
 let playerTally = document.getElementById('player-tally');
 let computerTally = document.getElementById('computer-tally');
 let tieTally = document.getElementById('tie-tally');
 
 
 
+//buttons below
 
 
-
-const resetButton = document.querySelector('.reset-button');
+const resetButton = document.querySelector('.reset-button');//meant to reset the game and erase memory of game history
 resetButton.addEventListener('click', function(){
     winStatus = null;
     plays = 0;
@@ -86,29 +69,20 @@ resetButton.addEventListener('click', function(){
 
 
     topLeftButton.textContent = '';
-    // topLeftButton.setAttribute('style', "font-size: 80px");
     topCenterButton.textContent = '';
-    // topCenterButton.setAttribute('style', "font-size: 80px");
     topRightButton.textContent = '';
-    // topRightButton.setAttribute('style', "font-size: 80px");
     middleLeftButton.textContent = '';
-    // middleLeftButton.setAttribute('style', "font-size: 80px");
-    middleCenterButton.textContent = '';
-    // middleCenterButton.setAttribute('style', "font-size: 80px");
+   middleCenterButton.textContent = '';
     middleRightButton.textContent = '';
-    // middleRightButton.setAttribute('style', "font-size: 80px");
     bottomLeftButton.textContent = '';
-    // bottomLeftButton.setAttribute('style', "font-size: 80px");
     bottomCenterButton.textContent = '';
-    // bottomCenterButton.setAttribute('style', "font-size: 80px");
     bottomRightButton.textContent = '';
-    // bottomRightButton.setAttribute('style', "font-size: 80px");
 
     console.clear();
 });
 
 
-const nextGameButton = document.querySelector('.next-game');
+const nextGameButton = document.querySelector('.next-game'); //resets the game but keeps track of game history 
 nextGameButton.addEventListener('click', function(){
    if (winStatus !== null){
         console.clear();
@@ -143,31 +117,22 @@ nextGameButton.addEventListener('click', function(){
         tieTally.innerText = tieGames;
 
         topLeftButton.textContent = '';
-        // topLeftButton.setAttribute('style', "font-size: 80px");
         topCenterButton.textContent = '';
-        // topCenterButton.setAttribute('style', "font-size: 80px");
         topRightButton.textContent = '';
-        // topRightButton.setAttribute('style', "font-size: 80px");
         middleLeftButton.textContent = '';
-        // middleLeftButton.setAttribute('style', "font-size: 80px");
         middleCenterButton.textContent = '';
-        // middleCenterButton.setAttribute('style', "font-size: 80px");
         middleRightButton.textContent = '';
-        // middleRightButton.setAttribute('style', "font-size: 80px");
         bottomLeftButton.textContent = '';
-        // bottomLeftButton.setAttribute('style', "font-size: 80px");
         bottomCenterButton.textContent = '';
-        // bottomCenterButton.setAttribute('style', "font-size: 80px");
         bottomRightButton.textContent = '';
-        // bottomRightButton.setAttribute('style', "font-size: 80px");
 
 }});
 
 
-const topLeftButton = document.getElementById('top-left');
+const topLeftButton = document.getElementById('top-left'); //Each of the 9 squares are represented by a button, which I have perform a functino when clicked
 topLeftButton.addEventListener('click', function(){
-    if (topRow[0]===0){
-        topRow[0] = 1;
+    if (topRow[0]===0){ //if no one has gone here yet 
+        topRow[0] = 1; //put a "1" in each of the winning arrays applicable 
         leftColumn[0]=1;
         diagonalTopToBottom[0]=1;
         topLeftButton.textContent = 'X';
@@ -175,27 +140,18 @@ topLeftButton.addEventListener('click', function(){
         messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
         messageEl.setAttribute("style", "color: black");
         plays++;
-        determineWinner();
-        if (winStatus === null){
+        determineWinner(); //before moving on to the computer placing an 0, it will check determine winner, which would print a winning message and basically end the game
+        if (winStatus === null){ //if still no one has won
         
-            compPosition();
+            compPosition(); 
             compAssignment(firstArrayNum, secondArrayNum);
             plays++
             determineWinner();
             
         }
 
-        //before this I need to call a function that would update a global variable win status 
-
-     //should update first and second arrayNum
-       //Should still reconognize these input since they are global variables and therefore those values are being updated from the while looop
-            //Now that we have our position for the computer, we can call the compAssignment function passing in these position values, which will update the arrays accordingly
-            //eventually call the render function now that the arrays are updated 
     }
-        
-        //Now that we have our position for the computer, we can call the compAssignment function passing in these position values, which will update the arrays accordingly
-        
-        //eventually call the render function now that the arrays are updated 
+         
     else{
         console.log("This space is already taken, please try again");
         messageEl.innerText = "This space is already taken, please try again";
@@ -434,45 +390,8 @@ bottomRightButton.addEventListener('click', function(){
 });
 
 
-//function render(){
-    //if 
-//}
-               
-//do a function where like if a button is clicked, check the array? 
-
-// console.log(bottomRow);
-// console.log(leftColumn);
-// console.log(centerColumn);
-// console.log(rightColumn);
-// console.log(diagonalBottomToTop);
-// console.log(diagonalTopToBottom);
-
-            
-            
-         
-    //some variable to determine if it's player 1 or computers turn)
-        //basically do if turn equals 1, then you're going to add 1s to the arrays and if player turn is 2
-        
-    
-
-    
-
-
-
-// function addToArray (){
-//     if (turn === 1 & winStatus === null){
-//         if ()
-//         topRow[0] = 1;
-//         leftColumn[0]=1;
-//         diagonalTopToBottom[0]=1;
-//     }
-// }
-
-
-// eventListener();
-
-function compPosition (){ //find the position we should add a 2 at by using randomly generated index numbers and checking if the values at those indicies are 0 (aka haven't been played yet)
-        let numOfEmptySpaces = 0; 
+function compPosition (){ //find the position we should add a 2 ("O" on the board, 2 in the array) at by using randomly generated index numbers and checking if the values at those indicies are 0 (aka haven't been played yet)
+        let numOfEmptySpaces = 0; //the number of empty spaces on the board - because we are using an array below (boardArray) which only has nine indicies (3 arrays in an array), this will directly map to the number of free spaces
         for (i = 0 ; i < boardArray.length; i++){
             for (x = 0; x < boardArray[i].length; x++){
                 if (boardArray[i][x] === 0){ //if the actual values in boardArray === 0 (aka no one has played there yet), increment the number of empty spaces
@@ -484,26 +403,23 @@ function compPosition (){ //find the position we should add a 2 at by using rand
             //This is needed because the user could click the button and add a 1 to the board array for the 9th square and then the computer would be trying to fill the 10th forever 
                firstArrayNum = Math.floor(Math.random()*3); //This should give me a random integer of either 0,1,or 2
                secondArrayNum = Math.floor(Math.random()*3);
-               nextCompMove = boardArray[firstArrayNum][secondArrayNum]; //so in our boardArray which is basically just an array of the three rows, 
-            //this is the value at the potential position of the computers move
+               nextCompMove = boardArray[firstArrayNum][secondArrayNum]; //so in our boardArray, which is basically just an array of the three rows, this is the value at the potential position of the computer's move
     
             while (nextCompMove !== 0){  //while the value at the potential position is NOT 0, the computer will keep generating random integers for the positions
                 //until it lands on a combo position where there would be a value of 0, meaning no one has played there yet
-                firstArrayNum = Math.floor(Math.random()*3);
+                firstArrayNum = Math.floor(Math.random()*3); //these are global variables that will then be passed into compAssignment as arguments fot the row and column position
                 secondArrayNum = Math.floor(Math.random()*3);
-                nextCompMove = boardArray[firstArrayNum][secondArrayNum]; //I believe that changing this variable is enough for the while loop to keep running untill that is not true (aka is equal to 0)
+                nextCompMove = boardArray[firstArrayNum][secondArrayNum]; //This variable is enough for the while loop to keep running until that is not true (aka is equal to 0)
             //eventually this should be 0 and we would have our position of where to put a 2 for the computer generated value and the while loop would end
             }
         }
-        else {
-            //change the win status to whoever won or tie and render 
-        }
+
 }
 
            
 
 
-function compAssignment(rowPosition, columnPosition){
+function compAssignment(rowPosition, columnPosition){ //now that we have a position that works from our firstArrayNum and secondArrayNums, we will update the logic to include 2's where necessary and update the board to show "O"'s 
     if (winStatus === null){
         if (rowPosition === 0 && columnPosition === 0){//these represent the position aka the top left, not the actual value in the array
             topRow[0] = 2;
@@ -568,32 +484,11 @@ function compAssignment(rowPosition, columnPosition){
     }
 }
 
-// (plays === 8) && 
-
-function determineWinner (){  //This first if is predicting a tie ahead of time so the player doesn't have to finish - if each of the 8 winning arrays has both a 1 and a 2 in it
-    //or it is the 8th turn and there is a 2 in each of the 8 winning arrays but the computer hasn't won yet (meaning the player can't win with the last move), the it will predict 
-    // and call a tie before making the player play the last move
-   
-        
-    //     topRow.includes(1) &&
-    // middleRow.includes(1) && bottomRow.includes(1) && leftColumn.includes(1) && centerColumn.includes(1) && rightColumn.includes(1) && diagonalTopToBottom.includes(1) && diagonalBottomToTop.includes(1))))){
 
 
-
-    // ((topRow.includes(2) && middleRow.includes(2) && bottomRow.includes(2) && leftColumn.includes(2) && centerColumn.includes(2) && rightColumn.includes(2)
-    // && diagonalTopToBottom.includes(2) && diagonalBottomToTop.includes(2)))  
-    
-    // ((plays === 7 && (!(topRow.includes(1) && middleRow.includes(1) && bottomRow.includes(1) && leftColumn.includes(1) && centerColumn.includes(1) && rightColumn.includes(1) && diagonalTopToBottom.includes(1) && diagonalBottomToTop.includes(1)))) && (((topRow[0] === 0 && topRow[1] === 0 && topRow[2] === 1) || (topRow[0] === 0 &&
-    //     topRow[1] ===1 && topRow[2] ===0) || (topRow[0]===1 && topRow[1] === 0 && topRow[2] === 0)) || ((middleRow[0] === 0 && middleRow[1] === 0 && middleRow[2] === 1) || (middleRow[0] === 0 &&
-    //         middleRow[1] ===1 && middleRow[2] ===0) || (middleRow[0]===1 && middleRow[1] === 0 && middleRow[2] === 0)) || ((bottomRow[0] === 0 && bottomRow[1] === 0 && bottomRow[2] === 1) || (bottomRow[0] === 0 &&
-    //             bottomRow[1] ===1 && bottomRow[2] ===0) || (bottomRow[0]===1 && bottomRow[1] === 0 && bottomRow[2] === 0)) || ((leftColumn[0] === 0 && leftColumn[1] === 0 && leftColumn[2] === 1) || (leftColumn[0] === 0 &&
-    //                 leftColumn[1] ===1 && leftColumn[2] ===0) || (leftColumn[0]===1 && leftColumn[1] === 0 && leftColumn[2] === 0)) || ((centerColumn[0] === 0 && centerColumn[1] === 0 && centerColumn[2] === 1) || (centerColumn[0] === 0 &&
-    //                     centerColumn[1] ===1 && centerColumn[2] ===0) || (centerColumn[0]===1 && centerColumn[1] === 0 && centerColumn[2] === 0)) || ((rightColumn[0] === 0 && rightColumn[1] === 0 && rightColumn[2] === 1) || (rightColumn[0] === 0 &&
-    //                         rightColumn[1] ===1 && rightColumn[2] ===0) || (rightColumn[0]===1 && rightColumn[1] === 0 && rightColumn[2] === 0)) || ((diagonalTopToBottom[0] === 0 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 1) || (diagonalTopToBottom[0] === 0 &&
-    //                             diagonalTopToBottom[1] ===1 && diagonalTopToBottom[2] ===0) || (diagonalTopToBottom[0]===1 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 0)) || ((diagonalBottomToTop[0] === 0 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 1) || (diagonalBottomToTop[0] === 0 &&
-    //                                 diagonalBottomToTop[1] ===1 && diagonalBottomToTop[2] ===0) || (diagonalBottomToTop[0]===1 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 0))))){
-    if (winStatus === null){
-        if (!topRow.includes(0)){
+function determineWinner (){   //The heart of the win logid - this will call a win if a whole one of the eight winning arrays is either 1 or 2
+    if (winStatus === null){   //It also predicts a tie at either 7 or 8 turns so the game doesn't have to finish 
+        if (!topRow.includes(0)){  //Whether a win, loss, or tie, the game status is updated so the winStatus variable will no longer be null and many of these funcitons will no longer run. It will also increment the number of wins by the player, computer, or tie
             if (!topRow.includes(2)){
                 winStatus = 1;
                 console.log("Contracts! You win!");
@@ -722,18 +617,10 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
             }
         }
         if (winStatus === null){
-            if (((topRow.includes(1) && topRow.includes(2)) && (middleRow.includes(1) && middleRow.includes(2)) && (bottomRow.includes(1) && bottomRow.includes(2)) //in the future could i put all of these arrays into an array and do .contains of the whole thing?
-            && (leftColumn.includes(1) && leftColumn.includes(2)) && (centerColumn.includes(1) && centerColumn.includes(2)) && (rightColumn.includes(1) && rightColumn.includes(2)) //if there is a 1 and 2 in every winning array
+            if (((topRow.includes(1) && topRow.includes(2)) && (middleRow.includes(1) && middleRow.includes(2)) && (bottomRow.includes(1) && bottomRow.includes(2)) //Will return a tie if there is a 1 and 2 in every possible win array (all 8 arrays)
+            && (leftColumn.includes(1) && leftColumn.includes(2)) && (centerColumn.includes(1) && centerColumn.includes(2)) && (rightColumn.includes(1) && rightColumn.includes(2)) 
             && (diagonalTopToBottom.includes(1) && diagonalTopToBottom.includes(2)) && (diagonalBottomToTop.includes(1) && diagonalBottomToTop.includes(2)))){
                                                                                 winStatus = 3;
-                                                                                // console.log(topRow);
-                                                                                // console.log(middleRow);
-                                                                                // console.log(bottomRow);
-                                                                                // console.log(leftColumn);
-                                                                                // console.log(centerColumn);
-                                                                                // console.log(rightColumn);
-                                                                                // console.log(diagonalTopToBottom);
-                                                                                // console.log(diagonalBottomToTop);
                                                                                 console.log("It's a tie1! Try again!");
                                                                                 messageEl.innerText = "It's a Tie!";
                                                                                 messageEl.setAttribute("style", "color: purple");
@@ -743,13 +630,13 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
         } 
 
         if(winStatus === null){
-            if (plays === 7 || plays === 8){
+            if (plays === 7 || plays === 8){ //Will predict a tie if both the computer and player do not have the potential to win with their last turn (i.e., there are no possible win arrays with either two 1s and 0 or two 2s and a 0 that could be successfully completed)
                 let possibleWinsForPlayer = 0;
                 let numZeros = 0;
                 let numOnes = 0;
 
                 for(let i = 0; i < totalWinningCombos.length; i++){
-                    for(let x = 0; x < totalWinningCombos[i].length; x++){  //This should reset numZeros and numOnes to 0 every time the inner for loop interates, so then possible Wins is updated if the condition is met and that would be a running tally 
+                    for(let x = 0; x < totalWinningCombos[i].length; x++){  //This loops through all of the 8 arrays and sees if there are any examples of there being two 1s and one zero, meaning player 1 could still win
                         if (totalWinningCombos[i][x] === 0){
                             numZeros++;
                         }
@@ -758,24 +645,19 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                         }
                         if (numOnes === 2 && numZeros === 1){
                             possibleWinsForPlayer++;
-                            //console.log(possibleWinsForPlayer + "First 1" + plays);
                         }
                         
                         
                     }
-                console.log("numZeros" + numZeros);
-                console.log("numOnes" + numOnes);
-                console.log("possible Wins" + possibleWinsForPlayer);
                 numZeros = 0;
                 numOnes = 0;
                 }
-                if (possibleWinsForPlayer === 0){
-                    //console.log(possibleWinsForPlayer + "Second 2" + plays);
+                if (possibleWinsForPlayer === 0){ //If player 1 do not have a chace of winning, do the following 
                     let possibleWinsForComputer = 0;
                     let numZerosComp = 0;
                     let numTwosComp = 0;
                     for(let a = 0; a < totalWinningCombos.length; a++){               
-                        for(let b = 0; b < totalWinningCombos[a].length; b++){  //This should reset numZeros and numOnes to 0 every time the inner for loop interates, so then possible Wins is updated if the condition is met and that would be a running tally 
+                        for(let b = 0; b < totalWinningCombos[a].length; b++){  
                            
                             if (totalWinningCombos[a][b] === 0){
                                 numZerosComp++;
@@ -792,17 +674,14 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                         numTwosComp = 0; 
                        
                     }
-                    if (possibleWinsForComputer === 0){
-                        //console.log(totalWinningCombos);
-                        //console.log(possib)
+                    if (possibleWinsForComputer === 0){ //If there is also not a possibility for the computer to win with its last turn, then it will be a tie
+                    
                         winStatus = 3;
                         console.log("GOING TO BE A TIE!!");
                         messageEl.innerText = "It's a Tie!";
                         messageEl.setAttribute("style", "color: purple");
                         tieGames++;
-                        // console.log(possibleWinsForPlayer);
-                        // console.log(possibleWinsForComputer);
-                        // console.log(plays);
+
                         
                     }
                 }
@@ -812,13 +691,13 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
         }
         
         if(winStatus === null){
-            if (plays === 8){
+            if (plays === 8){ //Using the same logic as above, this will return a tie if at turn 8, there is no possible way for the player to win (because the player always goes first they will always have the 9th turn)
                 let possibleWinsForPlayerV2 = 0;
                 let numZerosV2 = 0;
                 let numOnesV2 = 0;
                 for(let c = 0; c < totalWinningCombos.length; c++){
                     
-                    for(let d = 0; d < totalWinningCombos[c].length; d++){  //This should reset numZeros and numOnes to 0 every time the inner for loop interates, so then possible Wins is updated if the condition is met and that would be a running tally 
+                    for(let d = 0; d < totalWinningCombos[c].length; d++){  
                       
                         
                         if (totalWinningCombos[c][d] === 0){
@@ -834,8 +713,7 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                     numZerosV2 = 0;
                     numOnesV2 = 0;   
                 }
-                if (possibleWinsForPlayerV2 === 0){
-                    // console.log(totalWinningCombos);
+                if (possibleWinsForPlayerV2 === 0){ //If there is no possible way for player 1 to win, call it a tie before they actually have to go play the 9th square
                     winStatus = 3;
                     console.log("GOING TO BE A TIE! 8Plays!");
                     messageEl.innerText = "It's a Tie!";
@@ -853,98 +731,3 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-    // //if it has been 7 plays, you need to account for it being a tie if there are no examples of two 2s or two 1s because with one more turn, neither could win
-    // //if it has been 8 turns, you onnly need to account for if player 1 (x) could win because the computer can't win - in that case only annouce a tie if there is not something with two 1s in it
-    // if (winStatus === null){
-    //     if (((plays === 7) && (!(topRow[0] === 0 && topRow[1] === 1 && topRow[2] === 1) && !(topRow[0] === 1 &&  // If it has been 7 turns and there is NO array with two 1s (aka player 1 cannot win)
-    //     topRow[1] ===1 && topRow[2] ===0) && !(topRow[0]===1 && topRow[1] === 0 && topRow[2] === 1) && !(middleRow[0] === 0 && middleRow[1] === 1 && middleRow[2] === 1) && !(middleRow[0] === 1 &&
-    //         middleRow[1] ===1 && middleRow[2] ===0) && !(middleRow[0]===1 && middleRow[1] === 0 && middleRow[2] === 1) && !(bottomRow[0] === 0 && bottomRow[1] === 1 && bottomRow[2] === 1) && !(bottomRow[0] === 1 &&
-    //             bottomRow[1] ===1 && bottomRow[2] ===0) && !(bottomRow[0]===1 && bottomRow[1] === 0 && bottomRow[2] === 1) && !(leftColumn[0] === 0 && leftColumn[1] === 1 && leftColumn[2] === 1) && !(leftColumn[0] === 1 &&
-    //                 leftColumn[1] ===1 && leftColumn[2] ===0) && !(leftColumn[0]===1 && leftColumn[1] === 0 && leftColumn[2] === 1) && !(centerColumn[0] === 0 && centerColumn[1] === 1 && centerColumn[2] === 1) && !(centerColumn[0] === 1 &&
-    //                     centerColumn[1] ===1 && centerColumn[2] ===0) && !(centerColumn[0]===1 && centerColumn[1] === 0 && centerColumn[2] === 1) && !(rightColumn[0] === 0 && rightColumn[1] === 1 && rightColumn[2] === 1) && !(rightColumn[0] === 1 &&
-    //                         rightColumn[1] ===1 && rightColumn[2] ===0) && !(rightColumn[0]===1 && rightColumn[1] === 0 && rightColumn[2] === 1) && !(diagonalTopToBottom[0] === 0 && diagonalTopToBottom[1] === 1 && diagonalTopToBottom[2] === 1) && !(diagonalTopToBottom[0] === 1 &&
-    //                             diagonalTopToBottom[1] ===1 && diagonalTopToBottom[2] ===0) && !(diagonalTopToBottom[0]===1 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 1) && !(diagonalBottomToTop[0] === 0 && diagonalBottomToTop[1] === 1 && diagonalBottomToTop[2] === 1) && !(diagonalBottomToTop[0] === 1 &&
-    //                                 diagonalBottomToTop[1] ===1 && diagonalBottomToTop[2] ===0) && !(diagonalBottomToTop[0]===1 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 1))) || ((plays === 8) && ((!(topRow[0] === 0 && topRow[1] === 2 && topRow[2] === 2) && !(topRow[0] === 2 &&  // If it has been 7 turns and there is NO array with two 1s (aka player 1 cannot win)
-    //                                 topRow[1] ===2 && topRow[2] ===0) && !(topRow[0]===2 && topRow[1] === 0 && topRow[2] === 2) && !(middleRow[0] === 0 && middleRow[1] === 2 && middleRow[2] === 2) && !(middleRow[0] === 2 &&
-    //                                     middleRow[1] ===2 && middleRow[2] ===0) && !(middleRow[0]===2 && middleRow[1] === 0 && middleRow[2] === 2) && !(bottomRow[0] === 0 && bottomRow[1] === 2 && bottomRow[2] === 2) && !(bottomRow[0] === 2 &&
-    //                                         bottomRow[1] ===2 && bottomRow[2] ===0) && !(bottomRow[0]===2 && bottomRow[1] === 0 && bottomRow[2] === 2) && !(leftColumn[0] === 0 && leftColumn[1] === 2 && leftColumn[2] === 2) && !(leftColumn[0] === 2 &&
-    //                                             leftColumn[1] ===2 && leftColumn[2] ===0) && !(leftColumn[0]===2 && leftColumn[1] === 0 && leftColumn[2] === 2) && !(centerColumn[0] === 0 && centerColumn[1] === 2 && centerColumn[2] === 2) && !(centerColumn[0] === 2 &&
-    //                                                 centerColumn[1] ===2 && centerColumn[2] ===0) && !(centerColumn[0]===2 && centerColumn[1] === 0 && centerColumn[2] === 2) && !(rightColumn[0] === 0 && rightColumn[1] === 2 && rightColumn[2] === 2) && !(rightColumn[0] === 2 &&
-    //                                                     rightColumn[1] ===2 && rightColumn[2] ===0) && !(rightColumn[0]===2 && rightColumn[1] === 0 && rightColumn[2] === 2) && !(diagonalTopToBottom[0] === 0 && diagonalTopToBottom[1] === 2 && diagonalTopToBottom[2] === 2) && !(diagonalTopToBottom[0] === 2 &&
-    //                                                         diagonalTopToBottom[1] ===2 && diagonalTopToBottom[2] ===0) && !(diagonalTopToBottom[0]===2 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 2) && !(diagonalBottomToTop[0] === 0 && diagonalBottomToTop[1] === 2 && diagonalBottomToTop[2] === 2) && !(diagonalBottomToTop[0] === 2 &&
-    //                                                             diagonalBottomToTop[1] ===2 && diagonalBottomToTop[2] ===0) && !(diagonalBottomToTop[0]===2 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 2)) && (!(topRow[0] === 0 && topRow[1] === 1 && topRow[2] === 1) && !(topRow[0] === 1 &&  // If it has been 7 turns and there is NO array with two 1s (aka player 1 cannot win)
-    //                                                             topRow[1] ===1 && topRow[2] ===0) && !(topRow[0]===1 && topRow[1] === 0 && topRow[2] === 1) && !(middleRow[0] === 0 && middleRow[1] === 1 && middleRow[2] === 1) && !(middleRow[0] === 1 &&
-    //                                                                 middleRow[1] ===1 && middleRow[2] ===0) && !(middleRow[0]===1 && middleRow[1] === 0 && middleRow[2] === 1) && !(bottomRow[0] === 0 && bottomRow[1] === 1 && bottomRow[2] === 1) && !(bottomRow[0] === 1 &&
-    //                                                                     bottomRow[1] ===1 && bottomRow[2] ===0) && !(bottomRow[0]===1 && bottomRow[1] === 0 && bottomRow[2] === 1) && !(leftColumn[0] === 0 && leftColumn[1] === 1 && leftColumn[2] === 1) && !(leftColumn[0] === 1 &&
-    //                                                                         leftColumn[1] ===1 && leftColumn[2] ===0) && !(leftColumn[0]===1 && leftColumn[1] === 0 && leftColumn[2] === 1) && !(centerColumn[0] === 0 && centerColumn[1] === 1 && centerColumn[2] === 1) && !(centerColumn[0] === 1 &&
-    //                                                                             centerColumn[1] ===1 && centerColumn[2] ===0) && !(centerColumn[0]===1 && centerColumn[1] === 0 && centerColumn[2] === 1) && !(rightColumn[0] === 0 && rightColumn[1] === 1 && rightColumn[2] === 1) && !(rightColumn[0] === 1 &&
-    //                                                                                 rightColumn[1] ===1 && rightColumn[2] ===0) && !(rightColumn[0]===1 && rightColumn[1] === 0 && rightColumn[2] === 1) && !(diagonalTopToBottom[0] === 0 && diagonalTopToBottom[1] === 1 && diagonalTopToBottom[2] === 1) && !(diagonalTopToBottom[0] === 1 &&
-    //                                                                                     diagonalTopToBottom[1] ===1 && diagonalTopToBottom[2] ===0) && !(diagonalTopToBottom[0]===1 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 1) && !(diagonalBottomToTop[0] === 0 && diagonalBottomToTop[1] === 1 && diagonalBottomToTop[2] === 1) && !(diagonalBottomToTop[0] === 1 &&
-    //                                                                                         diagonalBottomToTop[1] ===1 && diagonalBottomToTop[2] ===0) && !(diagonalBottomToTop[0]===1 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 1))))){
-
-
-    //                                                                         winStatus = 3;
-    //                                                                         console.log(topRow);
-    //                                                                         console.log(middleRow);
-    //                                                                         console.log(bottomRow);
-    //                                                                         console.log(leftColumn);
-    //                                                                         console.log(centerColumn);
-    //                                                                         console.log(rightColumn);
-    //                                                                         console.log(diagonalTopToBottom);
-    //                                                                         console.log(diagonalBottomToTop);
-    //                                                                         console.log(plays);
-    //                                                                         console.log("TIE TWO");}
-                                                                
-    // }
-    
-    
-    
-    // else if (((plays === 7) && (!(topRow[0] === 0 && topRow[1] === 2 && topRow[2] === 2) && !(topRow[0] === 2 &&  // If it has been 7 turns and there is NO array with two 1s (aka player 1 cannot win)
-    // topRow[1] ===2 && topRow[2] ===0) && !(topRow[0]===2 && topRow[1] === 0 && topRow[2] === 2) && !(middleRow[0] === 0 && middleRow[1] === 2 && middleRow[2] === 2) && !(middleRow[0] === 2 &&
-    //     middleRow[1] ===2 && middleRow[2] ===0) && !(middleRow[0]===2 && middleRow[1] === 0 && middleRow[2] === 2) && !(bottomRow[0] === 0 && bottomRow[1] === 2 && bottomRow[2] === 2) && !(bottomRow[0] === 2 &&
-    //         bottomRow[1] ===2 && bottomRow[2] ===0) && !(bottomRow[0]===2 && bottomRow[1] === 0 && bottomRow[2] === 2) && !(leftColumn[0] === 0 && leftColumn[1] === 2 && leftColumn[2] === 2) && !(leftColumn[0] === 2 &&
-    //             leftColumn[1] ===2 && leftColumn[2] ===0) && !(leftColumn[0]===2 && leftColumn[1] === 0 && leftColumn[2] === 2) && !(centerColumn[0] === 0 && centerColumn[1] === 2 && centerColumn[2] === 2) && !(centerColumn[0] === 2 &&
-    //                 centerColumn[1] ===2 && centerColumn[2] ===0) && !(centerColumn[0]===2 && centerColumn[1] === 0 && centerColumn[2] === 2) && !(rightColumn[0] === 0 && rightColumn[1] === 2 && rightColumn[2] === 2) && !(rightColumn[0] === 2 &&
-    //                     rightColumn[1] ===2 && rightColumn[2] ===0) && !(rightColumn[0]===2 && rightColumn[1] === 0 && rightColumn[2] === 2) && !(diagonalTopToBottom[0] === 0 && diagonalTopToBottom[1] === 2 && diagonalTopToBottom[2] === 2) && !(diagonalTopToBottom[0] === 2 &&
-    //                         diagonalTopToBottom[1] ===2 && diagonalTopToBottom[2] ===0) && !(diagonalTopToBottom[0]===2 && diagonalTopToBottom[1] === 0 && diagonalTopToBottom[2] === 2) && !(diagonalBottomToTop[0] === 0 && diagonalBottomToTop[1] === 2 && diagonalBottomToTop[2] === 2) && !(diagonalBottomToTop[0] === 2 &&
-    //                             diagonalBottomToTop[1] ===2 && diagonalBottomToTop[2] ===0) && !(diagonalBottomToTop[0]===2 && diagonalBottomToTop[1] === 0 && diagonalBottomToTop[2] === 2)))){
-        
-    //                                                                     winStatus = 3;
-    //                                                                     console.log(topRow);
-    //                                                                     console.log(middleRow);
-    //                                                                     console.log(bottomRow);
-    //                                                                     console.log(leftColumn);
-    //                                                                     console.log(centerColumn);
-    //                                                                     console.log(rightColumn);
-    //                                                                     console.log(diagonalTopToBottom);
-    //                                                                     console.log(diagonalBottomToTop);
-    //                                                                     console.log(plays);
-    //                                                                     console.log("It's a tie3! Try again!")
-
-
-    //                                                                 }
- 
-
-
-
-// let topRow = [0,0,0];
-// let middleRow = [0,0,0];
-// let bottomRow = [0,0,0];
-// let leftColumn= [0,0,0];
-// let centerColumn = [0,0,0];
-// let rightColumn = [0,0,0];
-// let diagonalTopToBottom = [0,0,0];
-// let diagonalBottomToTop = [0,0,0];
-
-
-//all of these functions should call render at the end so that last thing to happen is it does something to the screen? 
