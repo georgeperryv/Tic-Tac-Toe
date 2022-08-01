@@ -44,7 +44,9 @@ let secondArrayNum = 0;
 let nextCompMove = 0;
 
 let messageEl = document.querySelector('h3');
-
+let playerTally = document.getElementById('player-tally');
+let computerTally = document.getElementById('computer-tally');
+let tieTally = document.getElementById('tie-tally');
 
 
 
@@ -76,6 +78,11 @@ resetButton.addEventListener('click', function(){
     nextCompMove = 0;
 
     messageEl.innerText = "Let the games begin!";
+    messageEl.setAttribute("style", "color: black");
+
+    playerTally.innerText = "0";
+    computerTally.innerText = "0";
+    tieTally.innerText = "0";
 
 
     topLeftButton.textContent = '';
@@ -129,8 +136,11 @@ nextGameButton.addEventListener('click', function(){
         nextCompMove = 0;
 
         messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
+        messageEl.setAttribute("style", "color: black");
 
-
+        playerTally.innerText = gamesWonPlayer;
+        computerTally.innerText = gamesWonComputer;
+        tieTally.innerText = tieGames;
 
         topLeftButton.textContent = '';
         // topLeftButton.setAttribute('style', "font-size: 80px");
@@ -162,6 +172,8 @@ topLeftButton.addEventListener('click', function(){
         diagonalTopToBottom[0]=1;
         topLeftButton.textContent = 'X';
         topLeftButton.setAttribute('style', "font-size: 80px");
+        messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
+        messageEl.setAttribute("style", "color: black");
         plays++;
         determineWinner();
         if (winStatus === null){
@@ -186,8 +198,8 @@ topLeftButton.addEventListener('click', function(){
         //eventually call the render function now that the arrays are updated 
     else{
         console.log("This space is already taken, please try again");
-
-        h3.innerText = "This space is already taken, please try again";
+        messageEl.innerText = "This space is already taken, please try again";
+        messageEl.setAttribute("style", "color: red");
     }
 });
 
@@ -200,6 +212,8 @@ topCenterButton.addEventListener('click', function(){
         centerColumn[0]=1;
         topCenterButton.textContent = 'X';
         topCenterButton.setAttribute('style', "font-size: 80px");
+        messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
+        messageEl.setAttribute("style", "color: black");
         plays++;
         determineWinner();
         if (winStatus === null){
@@ -213,6 +227,8 @@ topCenterButton.addEventListener('click', function(){
     }
     else{
         console.log("This space is already taken, please try again");
+        messageEl.innerText = "This space is already taken, please try again";
+        messageEl.setAttribute("style", "color: red");
     }
 });
 
@@ -225,6 +241,8 @@ topRightButton.addEventListener('click', function(){
         diagonalBottomToTop[2] = 1;
         topRightButton.textContent = 'X';
         topRightButton.setAttribute('style', "font-size: 80px");
+        messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
+        messageEl.setAttribute("style", "color: black");
         plays++;
         determineWinner();
         if (winStatus === null){
@@ -238,6 +256,8 @@ topRightButton.addEventListener('click', function(){
     }
     else{
         console.log("This space is already taken, please try again");
+        messageEl.innerText = "This space is already taken, please try again";
+        messageEl.setAttribute("style", "color: red");
     }
 });
 
@@ -249,6 +269,8 @@ middleLeftButton.addEventListener('click', function(){
         leftColumn[1] = 1;
         middleLeftButton.textContent = 'X';
         middleLeftButton.setAttribute('style', "font-size: 80px");
+        messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
+        messageEl.setAttribute("style", "color: black");
         plays++;
         determineWinner();
         if (winStatus === null){
@@ -262,6 +284,8 @@ middleLeftButton.addEventListener('click', function(){
     }
     else{
         console.log("This space is already taken, please try again");
+        messageEl.innerText = "This space is already taken, please try again";
+        messageEl.setAttribute("style", "color: red");
     }
 });
 
@@ -275,6 +299,8 @@ middleCenterButton.addEventListener('click', function(){
         diagonalTopToBottom[1] = 1;
         middleCenterButton.textContent = 'X';
         middleCenterButton.setAttribute('style', "font-size: 80px");
+        messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
+        messageEl.setAttribute("style", "color: black");
         plays++;
         determineWinner();
         if (winStatus === null){
@@ -288,6 +314,8 @@ middleCenterButton.addEventListener('click', function(){
     }
     else{
         console.log("This space is already taken, please try again");
+        messageEl.innerText = "This space is already taken, please try again";
+        messageEl.setAttribute("style", "color: red");
     }
 });
 
@@ -300,6 +328,8 @@ middleRightButton.addEventListener('click', function(){
         rightColumn[1] = 1;
         middleRightButton.textContent = 'X';
         middleRightButton.setAttribute('style', "font-size: 80px");
+        messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
+        messageEl.setAttribute("style", "color: black");
         plays++;
         determineWinner();
         if (winStatus === null){
@@ -313,6 +343,8 @@ middleRightButton.addEventListener('click', function(){
     }
     else{
         console.log("This space is already taken, please try again");
+        messageEl.innerText = "This space is already taken, please try again";
+        messageEl.setAttribute("style", "color: red");
     }
 });
 
@@ -324,6 +356,8 @@ bottomLeftButton.addEventListener('click', function(){
         diagonalBottomToTop[0] = 1;
         bottomLeftButton.textContent = 'X';
         bottomLeftButton.setAttribute('style', "font-size: 80px");
+        messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
+        messageEl.setAttribute("style", "color: black");
         plays++;
         determineWinner();
         if (winStatus === null){
@@ -337,6 +371,8 @@ bottomLeftButton.addEventListener('click', function(){
     }
     else{
         console.log("This space is already taken, please try again");
+        messageEl.innerText = "This space is already taken, please try again";
+        messageEl.setAttribute("style", "color: red");
     }
 });
 
@@ -348,6 +384,8 @@ bottomCenterButton.addEventListener('click', function(){
         centerColumn[2] = 1;
         bottomCenterButton.textContent = 'X';
         bottomCenterButton.setAttribute('style', "font-size: 80px");
+        messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
+        messageEl.setAttribute("style", "color: black");
         plays++;
         determineWinner();
         if (winStatus === null){
@@ -361,6 +399,8 @@ bottomCenterButton.addEventListener('click', function(){
     }
     else{
         console.log("This space is already taken, please try again");
+        messageEl.innerText = "This space is already taken, please try again";
+        messageEl.setAttribute("style", "color: red");
     }
 });
 
@@ -373,6 +413,8 @@ bottomRightButton.addEventListener('click', function(){
         diagonalTopToBottom[2] = 1;
         bottomRightButton.textContent = 'X';
         bottomRightButton.setAttribute('style', "font-size: 80px");
+        messageEl.innerText = "On to game number " + (1 + (gamesWonComputer + gamesWonPlayer + tieGames) + "!");
+        messageEl.setAttribute("style", "color: black");
         plays++;
         determineWinner();
         if (winStatus === null){
@@ -386,6 +428,8 @@ bottomRightButton.addEventListener('click', function(){
     }
     else{
         console.log("This space is already taken, please try again");
+        messageEl.innerText = "This space is already taken, please try again";
+        messageEl.setAttribute("style", "color: red");
     }
 });
 
@@ -552,96 +596,128 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
         if (!topRow.includes(0)){
             if (!topRow.includes(2)){
                 winStatus = 1;
-                console.log("Contracts! You win!")
+                console.log("Contracts! You win!");
+                messageEl.innerText = "Congrats! You win!";
+                messageEl.setAttribute("style", "color: green");
                 gamesWonPlayer++;
             }
             else if (!topRow.includes(1)){
                 winStatus = 2;
-                console.log("Bummer...the computer won :(")
+                console.log("Bummer...the computer won :(");
+                messageEl.innerText = "Oh no! The computer won :(";
+                messageEl.setAttribute("style", "color: red");
                 gamesWonComputer++;
             }
         }
         if (!middleRow.includes(0)){
             if (!middleRow.includes(2)){
                 winStatus = 1;
-                console.log("Contracts! You win!")
+                console.log("Contracts! You win!");
+                messageEl.innerText = "Congrats! You win!";
+                messageEl.setAttribute("style", "color: green");
                 gamesWonPlayer++;
             }
             else if (!middleRow.includes(1)){
                 winStatus = 2;
-                console.log("Bummer...the computer won :(")
+                console.log("Bummer...the computer won :(");
+                messageEl.innerText = "Oh no! The computer won :(";
+                messageEl.setAttribute("style", "color: red");
                 gamesWonComputer++;
             }
         }
         if (!bottomRow.includes(0)){
             if (!bottomRow.includes(2)){
                 winStatus = 1;
-                console.log("Contracts! You win!")
+                console.log("Contracts! You win!");
+                messageEl.innerText = "Congrats! You win!";
+                messageEl.setAttribute("style", "color: green");
                 gamesWonPlayer++;
             }
             else if (!bottomRow.includes(1)){
                 winStatus = 2;
-                console.log("Bummer...the computer won :(")
+                console.log("Bummer...the computer won :(");
+                messageEl.innerText = "Oh no! The computer won :(";
+                messageEl.setAttribute("style", "color: red");
                 gamesWonComputer++;
             }
         }
         if (!leftColumn.includes(0)){
             if (!leftColumn.includes(2)){
                 winStatus = 1;
-                console.log("Contracts! You win!")
+                console.log("Contracts! You win!");
+                messageEl.innerText = "Congrats! You win!";
+                messageEl.setAttribute("style", "color: green");
                 gamesWonPlayer++;
             }
             else if (!leftColumn.includes(1)){
                 winStatus = 2;
-                console.log("Bummer...the computer won :(")
+                console.log("Bummer...the computer won :(");
+                messageEl.innerText = "Oh no! The computer won :(";
+                messageEl.setAttribute("style", "color: red");
                 gamesWonComputer++;
             }
         }
         if (!centerColumn.includes(0)){
             if (!centerColumn.includes(2)){
                 winStatus = 1;
-                console.log("Contracts! You win!")
+                console.log("Contracts! You win!");
+                messageEl.innerText = "Congrats! You win!";
+                messageEl.setAttribute("style", "color: green");
                 gamesWonPlayer++;
             }
             else if (!centerColumn.includes(1)){
                 winStatus = 2;
-                console.log("Bummer...the computer won :(")
+                console.log("Bummer...the computer won :(");
+                messageEl.innerText = "Oh no! The computer won :(";
+                messageEl.setAttribute("style", "color: red");
                 gamesWonComputer++;
             }
         }
         if (!rightColumn.includes(0)){
             if (!rightColumn.includes(2)){
                 winStatus = 1;
-                console.log("Contracts! You win!")
+                console.log("Contracts! You win!");
+                messageEl.innerText = "Congrats! You win!";
+                messageEl.setAttribute("style", "color: green");
                 gamesWonPlayer++;
             }
             else if (!rightColumn.includes(1)){
                 winStatus = 2;
-                console.log("Bummer...the computer won :(")
+                console.log("Bummer...the computer won :(");
+                messageEl.innerText = "Oh no! The computer won :(";
+                messageEl.setAttribute("style", "color: red");
                 gamesWonComputer++;
             }
         }
         if (!diagonalTopToBottom.includes(0)){
             if (!diagonalTopToBottom.includes(2)){
                 winStatus = 1;
-                console.log("Contracts! You win!")
+                console.log("Contracts! You win!");
+                messageEl.innerText = "Congrats! You win!";
+                messageEl.setAttribute("style", "color: green");
                 gamesWonPlayer++;
             }
             else if (!diagonalTopToBottom.includes(1)){
                 winStatus = 2;
-                console.log("Bummer...the computer won :(")
+                console.log("Bummer...the computer won :(");
+                messageEl.innerText = "Oh no! The computer won :(";
+                messageEl.setAttribute("style", "color: red");
                 gamesWonComputer++;
             }
         }
         if (!diagonalBottomToTop.includes(0)){
             if (!diagonalBottomToTop.includes(2)){
                 winStatus = 1;
-                console.log("Contracts! You win!")
+                console.log("Contracts! You win!");
+                messageEl.innerText = "Congrats! You win!";
+                messageEl.setAttribute("style", "color: green");
                 gamesWonPlayer++;
             }
             else if (!diagonalBottomToTop.includes(1)){
                 winStatus = 2;
-                console.log("Bummer...the computer won :(")
+                console.log("Bummer...the computer won :(");
+                messageEl.innerText = "Oh no! The computer won :(";
+                messageEl.setAttribute("style", "color: red");
                 gamesWonComputer++;
             }
         }
@@ -659,6 +735,8 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                                                                                 // console.log(diagonalTopToBottom);
                                                                                 // console.log(diagonalBottomToTop);
                                                                                 console.log("It's a tie1! Try again!");
+                                                                                messageEl.innerText = "It's a Tie!";
+                                                                                messageEl.setAttribute("style", "color: purple");
                                                                                 tieGames++;
             }
         
@@ -719,6 +797,8 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                         //console.log(possib)
                         winStatus = 3;
                         console.log("GOING TO BE A TIE!!");
+                        messageEl.innerText = "It's a Tie!";
+                        messageEl.setAttribute("style", "color: purple");
                         tieGames++;
                         // console.log(possibleWinsForPlayer);
                         // console.log(possibleWinsForComputer);
@@ -758,6 +838,8 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
                     // console.log(totalWinningCombos);
                     winStatus = 3;
                     console.log("GOING TO BE A TIE! 8Plays!");
+                    messageEl.innerText = "It's a Tie!";
+                    messageEl.setAttribute("style", "color: purple");
                     tieGames++;
                 }  
                 }
@@ -765,7 +847,9 @@ function determineWinner (){  //This first if is predicting a tie ahead of time 
         }
     
     else{
-        console.log("The game is already over!")
+        console.log("The game is already over!");
+        messageEl.innerText = "This game is already over! Hit reset to start over and erase game history or hit next game to continue playing ";
+        messageEl.setAttribute("style", "color: orange");
     }
 }
 

@@ -11,7 +11,12 @@
 <body>
     <h1>Tic-Tac-Toe</h1>
     <h2>Welcome to Tic-Tac-Toe! Try to place three X's in a row before the computer can place three O's in a row</h2>
-    <h3>Let the games begin!</h3>
+    <div class="tally-title">
+        <p class="game-title">Games Won</p>
+    </div>
+    <div class = "score"">
+        <p>Player: <span id="player-tally">0</span> &nbsp&nbsp Computer: <span id="computer-tally">0</span> &nbsp&nbsp Tie: <span id="tie-tally">0</span> </p>
+    </div>
     <div class="buttons">
         <button class="game-button" id="top-left"></button>
         <button class="game-button" id="top-center"></button>
@@ -23,6 +28,7 @@
         <button class="game-button" id="bottom-center"></button>
         <button class="game-button" id="bottom-right"></button>
     </div>
+    <h3>Let the games begin!</h3>
     <div class="other-buttons">
         <button class="reset-button">Reset</button>
         <button class="next-game">Next Game</button>
@@ -31,7 +37,6 @@
         <ul class="directions">
             <li>Press "Reset" to clear Tic-Tac-Toe board and erase game history </li>
             <li>Press "Next Game" to continue to a new game while keeping track of game history</li>
-            <li>Press "Game Statistics" for additional statistics related to the game history</li>
         </ul>
     </div>
 </body>

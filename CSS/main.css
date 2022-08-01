@@ -38,12 +38,26 @@ h1 {
 h2 {
 
     font-size: 18px;
+    font-weight:lighter;
+    font-style: italic;
 }
 
 h3{
-    font-size: 16px;
-    font-style: italic;
-    font-weight: lighter;
+    font-size: 25px;
+    height: 2px;
+}
+
+.tally-title{
+    padding: 5px 5px 5px 5px;
+    height: 25px;
+}
+
+.game-title{
+    text-decoration: underline;
+}
+
+.score {
+    display: inline-block;
 }
 
 .game-button {
@@ -53,9 +67,9 @@ background-color: rgb(47, 196, 220);
 
 
 .other-buttons {
-    display: inline;
+
     /* color: white; */
-    margin: 30px 30px 30px 30px;
+    height: 60px;
     min-width: 300px;
 }
 
@@ -75,6 +89,7 @@ background-color: rgb(47, 196, 220);
 
 div.list {
     text-align: center;
+    height: 10px;
 }
 
 ul.directions{
